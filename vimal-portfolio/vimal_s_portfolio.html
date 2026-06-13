@@ -1,0 +1,587 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  .portfolio {
+    font-family: 'Inter', sans-serif;
+    background: #0a0a0f;
+    color: #f0ede8;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .hero {
+    position: relative;
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    padding: 3rem 2rem 2rem;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 80% at 70% 50%, #1a2a3a 0%, #0a0a0f 70%);
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .photo-frame {
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 220px;
+    height: 280px;
+  }
+
+  .photo-bg-glow {
+    position: absolute; inset: -20px;
+    background: radial-gradient(ellipse at center, rgba(29,158,117,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .photo-container {
+    width: 100%; height: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(29,158,117,0.3);
+    position: relative;
+    box-shadow: 0 0 40px rgba(29,158,117,0.1);
+  }
+
+  .photo-container img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .photo-tag {
+    position: absolute;
+    bottom: 12px; left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.7);
+    border: 1px solid rgba(29,158,117,0.4);
+    color: #5DCAA5;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 360px;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #5DCAA5;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: #5DCAA5;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    line-height: 1.05;
+    margin-bottom: 0.5rem;
+    color: #f0ede8;
+  }
+
+  .hero-name span {
+    color: #5DCAA5;
+  }
+
+  .hero-role {
+    font-size: 0.85rem;
+    color: rgba(240,237,232,0.5);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-bio {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(240,237,232,0.75);
+    margin-bottom: 2rem;
+    max-width: 320px;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: #1D9E75;
+    color: #fff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover { background: #5DCAA5; color: #0a0a0f; transform: translateY(-1px); }
+
+  .btn-ghost {
+    background: transparent;
+    color: rgba(240,237,232,0.7);
+    border: 1px solid rgba(240,237,232,0.2);
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-ghost:hover { border-color: #5DCAA5; color: #5DCAA5; }
+
+  .stats-bar {
+    background: #101018;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 1.2rem 2rem;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+
+  .stat-item {
+    flex: 1;
+    min-width: 100px;
+    text-align: center;
+    padding: 0 1rem;
+    border-right: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #5DCAA5;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(240,237,232,0.4);
+  }
+
+  .section {
+    padding: 2.5rem 2rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #5DCAA5;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.06);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+  }
+
+  .service-card {
+    background: #12121a;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 1.2rem 1rem;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #1D9E75, #5DCAA5);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+
+  .service-card:hover { border-color: rgba(29,158,117,0.3); transform: translateY(-2px); }
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-icon {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #5DCAA5;
+  }
+
+  .service-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: #f0ede8;
+    margin-bottom: 4px;
+  }
+
+  .service-desc {
+    font-size: 11px;
+    color: rgba(240,237,232,0.45);
+    line-height: 1.5;
+  }
+
+  .tools-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tool-pill {
+    background: #12121a;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 12px;
+    color: rgba(240,237,232,0.65);
+    transition: all 0.2s;
+    cursor: default;
+  }
+
+  .tool-pill:hover { border-color: #5DCAA5; color: #5DCAA5; background: rgba(29,158,117,0.06); }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+  }
+
+  .work-card {
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    position: relative;
+    cursor: pointer;
+    background: #12121a;
+    border: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+  }
+
+  .work-card:hover { transform: scale(1.02); }
+
+  .work-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .work-icon { font-size: 28px; color: rgba(93,202,165,0.4); }
+
+  .work-title {
+    font-size: 11px;
+    color: rgba(240,237,232,0.4);
+    text-align: center;
+    padding: 0 12px;
+  }
+
+  .work-tag {
+    position: absolute;
+    top: 8px; right: 8px;
+    background: rgba(29,158,117,0.15);
+    border: 1px solid rgba(29,158,117,0.3);
+    color: #5DCAA5;
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+
+  .cta-section {
+    margin: 0 2rem 2rem;
+    background: linear-gradient(135deg, #0d1f17 0%, #081510 100%);
+    border: 1px solid rgba(29,158,117,0.2);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .cta-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #f0ede8;
+  }
+
+  .cta-sub {
+    font-size: 13px;
+    color: rgba(240,237,232,0.5);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .ticker {
+    background: #1D9E75;
+    color: #fff;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 2rem;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .ticker-inner {
+    display: inline-block;
+    animation: ticker 18s linear infinite;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(100%); }
+    to { transform: translateX(-100%); }
+  }
+
+  .play-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid rgba(93,202,165,0.4);
+    color: #5DCAA5;
+    padding: 9px 20px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-left: 10px;
+  }
+
+  .play-btn:hover { background: rgba(29,158,117,0.1); border-color: #5DCAA5; }
+
+  .footer-bar {
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .footer-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: rgba(240,237,232,0.3);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 16px;
+  }
+
+  .footer-link {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(240,237,232,0.3);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .footer-link:hover { color: #5DCAA5; }
+
+  .animate-in {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.7s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.25s; }
+  .delay-3 { animation-delay: 0.4s; }
+  .delay-4 { animation-delay: 0.55s; }
+</style>
+
+<div class="portfolio">
+
+  <div class="ticker">
+    <span class="ticker-inner">✦ VIDEO EDITING &nbsp;&nbsp;&nbsp; ✦ AI ANIMATIONS &nbsp;&nbsp;&nbsp; ✦ STORYTELLING &nbsp;&nbsp;&nbsp; ✦ BRAND CONTENT &nbsp;&nbsp;&nbsp; ✦ REELS & SHORTS &nbsp;&nbsp;&nbsp; ✦ CINEMATIC EDITS &nbsp;&nbsp;&nbsp; ✦ VIDEO EDITING &nbsp;&nbsp;&nbsp; ✦ AI ANIMATIONS &nbsp;&nbsp;&nbsp; ✦ STORYTELLING &nbsp;&nbsp;&nbsp;</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+
+    <div class="photo-frame">
+      <div class="photo-bg-glow"></div>
+      <div class="photo-container">
+        <img src="/mnt/user-data/uploads/SSS03511_JPG.jpeg" alt="Vimal S" onerror="this.style.display='none'; this.parentElement.style.background='#1a2a3a'; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;\'><span style=\'font-family:Playfair Display,serif;font-size:3rem;color:#5DCAA5\'>VS</span></div>'" />
+      </div>
+      <div class="photo-tag">Content Creator</div>
+    </div>
+
+    <div class="hero-content animate-in">
+      <div class="eyebrow">Portfolio 2025</div>
+      <h1 class="hero-name">Vimal<br><span>S.</span></h1>
+      <p class="hero-role">Video Editor &amp; Creative Storyteller</p>
+      <p class="hero-bio">Specializing in high-quality content and the art of storytelling — from cinematic edits to AI animations that elevate your brand.</p>
+      <div class="cta-row">
+        <button class="btn-primary" onclick="sendPrompt('Show me Vimal\'s work samples and pricing')">View My Work ↗</button>
+        <button class="play-btn" onclick="sendPrompt('I want to collaborate with Vimal S on a project')">
+          <i class="ti ti-player-play" aria-hidden="true"></i> Let's Collaborate
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-bar animate-in delay-1">
+    <div class="stat-item"><div class="stat-num">50+</div><div class="stat-label">Projects Done</div></div>
+    <div class="stat-item"><div class="stat-num">3+</div><div class="stat-label">Years XP</div></div>
+    <div class="stat-item"><div class="stat-num">AI</div><div class="stat-label">Animation</div></div>
+    <div class="stat-item"><div class="stat-num">∞</div><div class="stat-label">Creative Vision</div></div>
+  </div>
+
+  <div class="section animate-in delay-2">
+    <div class="section-header">
+      <span class="section-label">Services</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon"><i class="ti ti-cut" aria-hidden="true"></i></div>
+        <div class="service-name">Video Editing</div>
+        <div class="service-desc">Cinematic cuts, color grading, pacing</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="ti ti-robot" aria-hidden="true"></i></div>
+        <div class="service-name">AI Animations</div>
+        <div class="service-desc">Next-gen AI-driven motion visuals</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="ti ti-device-mobile" aria-hidden="true"></i></div>
+        <div class="service-name">Reels & Shorts</div>
+        <div class="service-desc">Social-first vertical video content</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="ti ti-brand-youtube" aria-hidden="true"></i></div>
+        <div class="service-name">Brand Videos</div>
+        <div class="service-desc">Stories that elevate your brand</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section animate-in delay-3" style="padding-top: 0;">
+    <div class="section-header">
+      <span class="section-label">Tools & Skills</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="tools-row">
+      <span class="tool-pill">Adobe Premiere Pro</span>
+      <span class="tool-pill">After Effects</span>
+      <span class="tool-pill">DaVinci Resolve</span>
+      <span class="tool-pill">Midjourney</span>
+      <span class="tool-pill">RunwayML</span>
+      <span class="tool-pill">CapCut</span>
+      <span class="tool-pill">Color Grading</span>
+      <span class="tool-pill">Motion Graphics</span>
+      <span class="tool-pill">Storytelling</span>
+    </div>
+  </div>
+
+  <div class="section animate-in delay-3" style="padding-top: 0;">
+    <div class="section-header">
+      <span class="section-label">Work Samples</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="work-grid">
+      <div class="work-card" onclick="sendPrompt('Tell me about Vimal\'s cinematic short film edits')">
+        <div class="work-placeholder">
+          <div class="work-icon"><i class="ti ti-movie" aria-hidden="true"></i></div>
+          <div class="work-title">Cinematic Short Film Edit</div>
+        </div>
+        <div class="work-tag">Film</div>
+      </div>
+      <div class="work-card" onclick="sendPrompt('Tell me about Vimal\'s AI animation projects')">
+        <div class="work-placeholder">
+          <div class="work-icon"><i class="ti ti-sparkles" aria-hidden="true"></i></div>
+          <div class="work-title">AI Animation Reel</div>
+        </div>
+        <div class="work-tag">AI</div>
+      </div>
+      <div class="work-card" onclick="sendPrompt('Tell me about Vimal\'s brand video work')">
+        <div class="work-placeholder">
+          <div class="work-icon"><i class="ti ti-brand-instagram" aria-hidden="true"></i></div>
+          <div class="work-title">Brand Reels & Campaigns</div>
+        </div>
+        <div class="work-tag">Brand</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-section animate-in delay-4">
+    <p class="cta-headline">Ready to elevate your brand?</p>
+    <p class="cta-sub">From concept to final cut — let's craft something unforgettable together.</p>
+    <button class="btn-primary" onclick="sendPrompt('I want to hire Vimal S for a project. What are the next steps?')">Start a Project ↗</button>
+  </div>
+
+  <div class="footer-bar">
+    <span class="footer-name">Vimal S.</span>
+    <div class="footer-links">
+      <span class="footer-link" onclick="sendPrompt('What is Vimal\'s contact information?')">Contact</span>
+      <span class="footer-link" onclick="sendPrompt('Show me Vimal\'s full portfolio')">Portfolio</span>
+      <span class="footer-link" onclick="sendPrompt('What are Vimal\'s services and rates?')">Services</span>
+    </div>
+  </div>
+
+</div>

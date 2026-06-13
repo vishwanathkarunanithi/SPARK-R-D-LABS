@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vimal S | Cinematic Video Editor</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="film-grain"></div>
+
+    <canvas id="cinematic-canvas"></canvas>
+
+    <nav class="glass-nav">
+        <div class="logo">
+            <img src="./logo.png" alt="Vimal S Logo" style="height: 65px; display: block;">
+        </div>
+        <div class="nav-links">
+            <a href="#hero">Director's Cut</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#work">Portfolio</a>
+            <a href="#contact">Bookings</a>
+        </div>
+    </nav>
+
+    <main class="scroll-container">
+        <section id="hero" class="hero-photo-layout">
+            <div class="hero-photo-container mass-reveal">
+                <div class="hero-photo-gradient"></div>
+                <img src="./SSS03511.JPG.jpeg" alt="Vimal S Portrait" class="hero-portrait">
+            </div>
+            <div class="content-wrapper hero-text-overlay">
+                <p class="subtitle mass-reveal" style="color: var(--accent);">Visual Storyteller & Editor</p>
+                <h1 class="title mass-reveal">CRAFTING<br><span class="accent stroke-text">CINEMATIC</span><br>ENGAGEMENT</h1>
+                <p class="description mass-reveal">Transforming raw footage into high-retention content for brands and creators across all platforms.</p>
+            </div>
+        </section>
+
+        <div class="ticker">
+            <span class="ticker-inner">✦ VIDEO EDITING &nbsp;&nbsp;&nbsp; ✦ AI ANIMATIONS &nbsp;&nbsp;&nbsp; ✦ STORYTELLING &nbsp;&nbsp;&nbsp; ✦ BRAND CONTENT &nbsp;&nbsp;&nbsp; ✦ REELS & SHORTS &nbsp;&nbsp;&nbsp; ✦ CINEMATIC EDITS &nbsp;&nbsp;&nbsp; ✦ VIDEO EDITING &nbsp;&nbsp;&nbsp; ✦ AI ANIMATIONS &nbsp;&nbsp;&nbsp; ✦ STORYTELLING &nbsp;&nbsp;&nbsp;</span>
+        </div>
+
+        <section id="showcase" class="mass-reveal" style="width: 100%; margin: 0; padding: 0;">
+            <div class="full-width-video-wrapper clickable" id="playWelcomeBtn">
+                <div class="video-inner-wrapper">
+                    <video playsinline class="avatar-video" id="welcomeVideo" style="display: none;">
+                        <source src="./Hello_and_welcome_I_m_Vimal_S.mp4" type="video/mp4">
+                    </video>
+                    <div class="watermark-patch" id="watermarkPatch"></div>
+                    <img src="./SSS03511.JPG.jpeg" alt="Vimal S" class="avatar-fallback" id="welcomeLogo">
+                    <div class="play-icon-overlay" id="playIcon">▶</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="cinematic-section" style="padding-top: 50px;">
+            <div class="content-wrapper" style="margin: 0 auto; max-width: 800px; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                <h2 class="title mass-reveal">THE <span class="accent stroke-text">EDITOR</span></h2>
+                <p class="description mass-reveal" style="font-size: 1.1rem; line-height: 1.8; color: var(--text-muted); text-align: justify;">
+                    I'm Vimal S, a dedicated video editor based in Chidambaram. My journey didn't start in a massive studio; it started with an intense passion for visual storytelling and a relentless drive to master the timeline. Over the past year, I have fully immersed myself in the art of the cut. I specialize in taking raw, unstructured, and chaotic footage and forging it into compelling, high-retention stories that command attention in today's fast-paced digital landscape.
+                    <br><br>
+                    Editing isn't just a technical skill for me—it's the architecture of emotion. Whether it's a high-energy brand reel or a subtle cinematic documentary, I focus on the micro-details: the exact frame where a beat drops, the perfect color grade that sets the mood, and the precise pacing that keeps an audience hooked until the very last second.
+                </p>
+                <div class="tools-row mass-reveal" style="margin-top: 20px; justify-content: center;">
+                    <span class="tool-pill">Adobe Premiere Pro</span>
+                    <span class="tool-pill">After Effects</span>
+                    <span class="tool-pill">DaVinci Resolve</span>
+                    <span class="tool-pill">Lightroom</span>
+                    <span class="tool-pill">Midjourney</span>
+                    <span class="tool-pill">RunwayML</span>
+                    <span class="tool-pill">CapCut</span>
+                    <span class="tool-pill">Color Grading</span>
+                    <span class="tool-pill">Motion Graphics</span>
+                    <span class="tool-pill">Storytelling</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="philosophy" class="cinematic-section" style="background: linear-gradient(180deg, var(--bg-dark) 0%, rgba(212, 175, 55, 0.05) 50%, var(--bg-dark) 100%); min-height: 50vh;">
+            <div class="content-wrapper" style="margin: 0 auto; max-width: 1000px; text-align: center;">
+                <h2 class="title mass-reveal" style="font-size: clamp(2rem, 5vw, 4rem); margin-bottom: 30px;">"Editing is the <br><span class="accent stroke-text">ARCHITECTURE</span> of emotion."</h2>
+                <p class="description mass-reveal" style="font-size: 1.3rem; max-width: 700px; margin: 0 auto;">
+                    I don't just assemble clips. I build rhythm. I believe that pacing breathes life into footage, cuts have a vocabulary of their own, and visuals must relentlessly drive the narrative forward. Every single frame must earn its place on the screen.
+                </p>
+            </div>
+        </section>
+
+        <div class="stats-bar mass-reveal">
+            <div class="stat-item"><div class="stat-num">50+</div><div class="stat-label">Projects Done</div></div>
+            <div class="stat-item"><div class="stat-num">1+</div><div class="stat-label">Year XP</div></div>
+            <div class="stat-item"><div class="stat-num">AI</div><div class="stat-label">Animation</div></div>
+            <div class="stat-item"><div class="stat-num">∞</div><div class="stat-label">Creative Vision</div></div>
+        </div>
+
+        <section id="services" class="cinematic-section" style="display: block; min-height: auto; padding: 100px 10vw;">
+            <div class="content-wrapper" style="margin: 0 auto; max-width: 1000px; width: 100%;">
+                <div class="section-header mass-reveal">
+                    <span class="section-label">Services</span>
+                    <div class="section-line"></div>
+                </div>
+                <div class="services-grid mass-reveal">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="ti ti-cut" aria-hidden="true"></i></div>
+                        <div class="service-name">Video Editing</div>
+                        <div class="service-desc">Cinematic cuts, color grading, pacing</div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="ti ti-robot" aria-hidden="true"></i></div>
+                        <div class="service-name">AI Animations</div>
+                        <div class="service-desc">Next-gen AI-driven motion visuals</div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="ti ti-device-mobile" aria-hidden="true"></i></div>
+                        <div class="service-name">Reels & Shorts</div>
+                        <div class="service-desc">Social-first vertical video content</div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><i class="ti ti-brand-youtube" aria-hidden="true"></i></div>
+                        <div class="service-name">Brand Videos</div>
+                        <div class="service-desc">Stories that elevate your brand</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="process" class="cinematic-section" style="display: block; min-height: auto; padding: 100px 10vw;">
+            <div class="content-wrapper" style="margin: 0 auto; max-width: 1000px; width: 100%;">
+                <div class="section-header mass-reveal">
+                    <span class="section-label">The Process</span>
+                    <div class="section-line"></div>
+                </div>
+                
+                <div class="process-timeline mass-reveal">
+                    <div class="process-step">
+                        <div class="step-number">01</div>
+                        <h3 class="step-title">Vision & Strategy</h3>
+                        <p class="step-desc">We start by dissecting the core message. Understanding your brand, the target audience, and the desired emotion is crucial before a single cut is made.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">02</div>
+                        <h3 class="step-title">The Rough Cut</h3>
+                        <p class="step-desc">Carving the narrative out of raw data. This is where the foundation is built, focusing purely on storytelling, pacing, and flow without getting distracted by the polish.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">03</div>
+                        <h3 class="step-title">Polish & Pacing</h3>
+                        <p class="step-desc">The magic happens here. Immersive sound design, precise color grading, motion graphics, and micro-edits are applied to elevate the footage from good to cinematic.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">04</div>
+                        <h3 class="step-title">Final Delivery</h3>
+                        <p class="step-desc">A masterpiece formatted and optimized for maximum retention across all target platforms, delivered ready to command attention.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="work" class="cinematic-section" style="display: block; min-height: auto; padding: 50px 10vw;">
+            <div class="content-wrapper" style="margin: 0 auto; max-width: 1000px; width: 100%;">
+                <div class="section-header mass-reveal">
+                    <span class="section-label">Work Samples</span>
+                    <div class="section-line"></div>
+                </div>
+                <div class="work-grid mass-reveal">
+                    <a href="https://wa.me/919025675071" target="_blank" class="work-card" style="text-decoration: none;">
+                        <div class="work-placeholder">
+                            <div class="work-icon"><i class="ti ti-movie" aria-hidden="true"></i></div>
+                            <div class="work-title">Cinematic Short Film Edit</div>
+                        </div>
+                        <div class="work-tag">Film</div>
+                    </a>
+                    <a href="https://wa.me/919025675071" target="_blank" class="work-card" style="text-decoration: none;">
+                        <div class="work-placeholder">
+                            <div class="work-icon"><i class="ti ti-sparkles" aria-hidden="true"></i></div>
+                            <div class="work-title">AI Animation Reel</div>
+                        </div>
+                        <div class="work-tag">AI</div>
+                    </a>
+                    <a href="https://wa.me/919025675071" target="_blank" class="work-card" style="text-decoration: none;">
+                        <div class="work-placeholder">
+                            <div class="work-icon"><i class="ti ti-brand-instagram" aria-hidden="true"></i></div>
+                            <div class="work-title">Brand Reels & Campaigns</div>
+                        </div>
+                        <div class="work-tag">Brand</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cinematic-section" style="min-height: auto; padding: 100px 10vw;">
+            <div class="cta-section mass-reveal">
+                <p class="cta-headline">Ready to elevate your brand?</p>
+                <p class="cta-sub">From concept to final cut — let's craft something unforgettable together.</p>
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=vimals2006s@gmail.com" target="_blank" class="btn-primary" style="text-decoration: none;">Email Me</a>
+                    <a href="https://wa.me/919025675071" target="_blank" class="btn-ghost" style="text-decoration: none;">WhatsApp</a>
+                </div>
+            </div>
+        </section>
+
+        <div class="footer-bar mass-reveal">
+            <span class="footer-name">Vimal S.</span>
+            <div class="footer-links">
+                <a href="#contact" class="footer-link" style="text-decoration: none;">Contact</a>
+                <a href="#work" class="footer-link" style="text-decoration: none;">Portfolio</a>
+                <a href="#services" class="footer-link" style="text-decoration: none;">Services</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

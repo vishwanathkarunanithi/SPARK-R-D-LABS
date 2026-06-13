@@ -91,24 +91,32 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 if (!audioCtx) audioCtx = new AudioContext();
                 if (audioCtx.state === 'suspended') audioCtx.resume();
+                // 1. Deep Base Drone
+                const osc1 = audioCtx.createOscillator();
+                osc1.type = 'square';
+                osc1.frequency.setValueAtTime(30, audioCtx.currentTime);
+                osc1.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 2.0);
                 
-                const osc = audioCtx.createOscillator();
+                // 2. High-Tech Sweeping Scanner
+                const osc2 = audioCtx.createOscillator();
+                osc2.type = 'triangle';
+                osc2.frequency.setValueAtTime(300, audioCtx.currentTime);
+                osc2.frequency.exponentialRampToValueAtTime(1500, audioCtx.currentTime + 1.0);
+                osc2.frequency.exponentialRampToValueAtTime(600, audioCtx.currentTime + 2.0);
+
                 const gainNode = audioCtx.createGain();
-                
-                // Deep hum that rises in pitch
-                osc.type = 'sawtooth';
-                osc.frequency.setValueAtTime(40, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 2.0);
-                
                 gainNode.gain.setValueAtTime(0.01, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.15, audioCtx.currentTime + 1.0);
+                gainNode.gain.exponentialRampToValueAtTime(0.08, audioCtx.currentTime + 0.5);
                 gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 2.14);
                 
-                osc.connect(gainNode);
+                osc1.connect(gainNode);
+                osc2.connect(gainNode);
                 gainNode.connect(audioCtx.destination);
                 
-                osc.start();
-                osc.stop(audioCtx.currentTime + 2.14);
+                osc1.start();
+                osc2.start();
+                osc1.stop(audioCtx.currentTime + 2.14);
+                osc2.stop(audioCtx.currentTime + 2.14);
             } catch(e) { /* Autoplay blocked */ }
         };
 

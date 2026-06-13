@@ -136,10 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch(e) { /* Autoplay blocked */ }
         };
 
-        // Attempt to play boot sound immediately
-        playSystemBootSound();
-        // -----------------------------------------------------------
-
         let currentProgress = 0;
         let logIndex = 0;
 
@@ -152,7 +148,19 @@ document.addEventListener('DOMContentLoaded', () => {
             loaderConsole.scrollTop = loaderConsole.scrollHeight;
         };
 
-        const bootInterval = setInterval(() => {
+        // Pause loader until user clicks to bypass Audio Autoplay block
+        const initOverlay = document.createElement('div');
+        initOverlay.style.cssText = 'position:absolute; inset:0; z-index:999999; display:flex; justify-content:center; align-items:center; background:rgba(0,0,0,0.85); backdrop-filter:blur(5px);';
+        initOverlay.innerHTML = '<button class="btn btn-primary" style="padding: 1.5rem 3rem; font-size: 1.2rem; border-color: var(--color-cyan); color: var(--color-cyan); box-shadow: 0 0 30px rgba(0, 229, 255, 0.4); text-transform: uppercase; cursor: pointer;">Initialize Core Systems</button>';
+        jarvisLoader.appendChild(initOverlay);
+
+        initOverlay.querySelector('button').addEventListener('click', () => {
+            initOverlay.remove();
+            
+            // Now browser allows audio
+            playSystemBootSound();
+
+            const bootInterval = setInterval(() => {
             // Speed up or slow down loader progress randomly
             currentProgress += Math.floor(Math.random() * 4) + 1;
             if (currentProgress >= 100) {
@@ -183,6 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 logIndex++;
             }
         }, 30);
+        }); // Close the click event listener
     }
 
 

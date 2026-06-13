@@ -1057,7 +1057,7 @@
             z-index: 99999;
             pointer-events: none;
             box-shadow: 0 0 50px 20px #00f0ff, inset 0 0 50px 20px #fff;
-            transition: transform 0.8s cubic-bezier(0.5, 0, 0.1, 1), background 0.6s ease 0.2s, box-shadow 0.6s ease 0.2s;
+            transition: transform 0.4s cubic-bezier(0.5, 0, 0.1, 1), background 0.3s ease 0.1s, box-shadow 0.3s ease 0.1s;
         }
 
         .portal-overlay.expand {
@@ -1084,16 +1084,16 @@
                 // Portal warp sound
                 osc.type = 'sine';
                 osc.frequency.setValueAtTime(30, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.8);
+                osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.4);
                 
                 gainNode.gain.setValueAtTime(0.5, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.8);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.4);
                 
                 osc.connect(gainNode);
                 gainNode.connect(audioCtx.destination);
                 
                 osc.start();
-                osc.stop(audioCtx.currentTime + 0.8);
+                osc.stop(audioCtx.currentTime + 0.4);
             }
 
             projectLinks.forEach(link => {
@@ -1110,7 +1110,7 @@
                     // Wait for animation to cover screen, then navigate
                     setTimeout(() => {
                         window.location.href = link.href;
-                    }, 800);
+                    }, 400);
                 });
             });
         });

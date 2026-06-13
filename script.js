@@ -83,6 +83,63 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     if (jarvisLoader) {
+        // --- ADDED: Web Audio API Synthesizer for Boot Sequence ---
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx;
+
+        const playSystemBootSound = () => {
+            try {
+                if (!audioCtx) audioCtx = new AudioContext();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                
+                // Deep hum that rises in pitch
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(40, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(200, audioCtx.currentTime + 2.0);
+                
+                gainNode.gain.setValueAtTime(0.01, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.15, audioCtx.currentTime + 1.0);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 2.14);
+                
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 2.14);
+            } catch(e) { /* Autoplay blocked */ }
+        };
+
+        const playBootCompleteSound = () => {
+            try {
+                if (!audioCtx) audioCtx = new AudioContext();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                
+                // High-tech success chime
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(1760, audioCtx.currentTime + 0.1);
+                
+                gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.5);
+                
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.5);
+            } catch(e) { /* Autoplay blocked */ }
+        };
+
+        // Attempt to play boot sound immediately
+        playSystemBootSound();
+        // -----------------------------------------------------------
+
         let currentProgress = 0;
         let logIndex = 0;
 
@@ -105,6 +162,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Complete sequence
                 loaderStatus.innerText = "SPARK CORE ONLINE";
                 writeLogLine("BOOT STRAP DIRECTIVE COMPLETED IN 2.14s.");
+                
+                // Play completion chime
+                playBootCompleteSound();
                 
                 setTimeout(() => {
                     jarvisLoader.classList.add('fade-out');

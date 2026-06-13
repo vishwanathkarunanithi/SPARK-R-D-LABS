@@ -1042,6 +1042,80 @@
         </div>
     </footer>
 
+    <!-- PORTAL TRANSITION OVERLAY -->
+    <div id="portalOverlay" class="portal-overlay"></div>
+    <style>
+        .portal-overlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: #00f0ff; /* Cyber blue */
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 99999;
+            pointer-events: none;
+            box-shadow: 0 0 50px 20px #00f0ff, inset 0 0 50px 20px #fff;
+            transition: transform 0.8s cubic-bezier(0.5, 0, 0.1, 1), background 0.6s ease 0.2s, box-shadow 0.6s ease 0.2s;
+        }
+
+        .portal-overlay.expand {
+            transform: translate(-50%, -50%) scale(500); /* Expands to cover screen */
+            background: #ff003c; /* Transitions to Mass Red */
+            box-shadow: 0 0 200px 100px #ff003c, inset 0 0 100px 50px #ffb700;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const projectLinks = document.querySelectorAll('a[href="projects.html"]');
+            const portal = document.getElementById('portalOverlay');
+            
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            let audioCtx;
+
+            function playWarpSound() {
+                if (!audioCtx) audioCtx = new AudioContext();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                
+                // Portal warp sound
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(30, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.8);
+                
+                gainNode.gain.setValueAtTime(0.5, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.8);
+                
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.8);
+            }
+
+            projectLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    // Only intercept if it's the same tab
+                    if (link.target === '_blank') return;
+                    
+                    e.preventDefault();
+                    playWarpSound();
+                    
+                    // Trigger the portal expansion
+                    portal.classList.add('expand');
+                    
+                    // Wait for animation to cover screen, then navigate
+                    setTimeout(() => {
+                        window.location.href = link.href;
+                    }, 800);
+                });
+            });
+        });
+    </script>
+
     <!-- Main Controller JS -->
     <script src="script.js"></script>
 </body>

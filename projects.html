@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPARK R&D LABS ⚡ | Client Projects</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Outfit:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <!-- Main Style -->
+    <link rel="stylesheet" href="styles.css?v=2.5">
+</head>
+<body>
+
+    <!-- Mouse Glowing Aura -->
+    <div class="mouse-glow" id="mouseGlow"></div>
+
+    <!-- ==================== STICKY HEADER & NAVBAR ==================== -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo-link">
+                <img src="logo.png" alt="SPARK Logo" class="logo-img">
+                <div class="logo-text">
+                    <span class="brand-name">SPARK</span>
+                    <span class="brand-sub">R&D LABS</span>
+                </div>
+            </a>
+            
+            <!-- Mobile Toggle -->
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <!-- Navigation Links -->
+            <nav class="main-nav" id="mainNav">
+                <ul>
+                    <li><a href="index.html#about" class="nav-item">Brotherhood</a></li>
+                    <li><a href="index.html#team" class="nav-item">Collective</a></li>
+                    <li><a href="projects.html" class="nav-item">Projects</a></li>
+                    <li><a href="index.html#contact" class="btn-collab">Start Collaboration</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main style="padding-top: 120px;">
+        <section class="team-section" id="projects-list">
+            <div class="container">
+                <div class="section-header center">
+                    <span class="section-subtitle">OUR WORK</span>
+                    <h2 class="section-title">Client Projects & Portfolios</h2>
+                    <div class="section-divider"></div>
+                    <p class="section-desc">
+                        Explore the custom portfolios, dashboards, and digital products we have engineered for our clients.
+                    </p>
+                </div>
+                
+                <div class="team-grid">
+                    <!-- Project Card: Vimal S -->
+                    <div class="member-card filter-item" data-tilt onclick="window.open('/vimal-portfolio/', '_blank')" style="cursor: pointer;">
+                        <div class="card-glow blue"></div>
+                        <div class="member-info" style="margin-top: 20px;">
+                            <span class="member-tag tag-blue">PORTFOLIO SITE</span>
+                            <h3 class="member-name">Vimal S</h3>
+                            <h4 class="member-role">Personal Creative Portfolio</h4>
+                            <div class="member-skills" style="margin-top: 15px;">
+                                <span>HTML/CSS</span>
+                                <span>JavaScript</span>
+                                <span>Responsive</span>
+                                <span>Video Embeds</span>
+                            </div>
+                            <div style="margin-top: 25px;">
+                                <a href="/vimal-portfolio/" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">View Project</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Placeholder for future projects -->
+                    <div class="member-card filter-item" data-tilt style="opacity: 0.5;">
+                        <div class="card-glow cyan"></div>
+                        <div class="member-info" style="margin-top: 20px;">
+                            <span class="member-tag tag-cyan">COMING SOON</span>
+                            <h3 class="member-name">New Project</h3>
+                            <h4 class="member-role">In Development...</h4>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

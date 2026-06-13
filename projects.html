@@ -10,13 +10,211 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Outfit:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
     <!-- Main Style -->
     <link rel="stylesheet" href="styles.css?v=2.5">
+    
+    <!-- MASS RED & YELLOW THEME OVERRIDE WITH TRANSITIONS -->
+    <style>
+        :root {
+            --mass-red: #ff003c;
+            --mass-yellow: #ffb700;
+            --mass-bg: #0a0002;
+            --mass-gradient: linear-gradient(135deg, var(--mass-red), var(--mass-yellow));
+        }
+
+        body {
+            background-color: var(--mass-bg) !important;
+            background-image: radial-gradient(circle at center, rgba(255,0,60,0.1) 0%, rgba(10,0,2,1) 70%) !important;
+            overflow-x: hidden;
+        }
+
+        .main-header {
+            border-bottom: 2px solid var(--mass-red) !important;
+            background: rgba(10, 0, 2, 0.9) !important;
+            box-shadow: 0 4px 30px rgba(255, 0, 60, 0.3) !important;
+        }
+
+        .logo-text .brand-name {
+            color: var(--mass-yellow) !important;
+            text-shadow: 0 0 10px var(--mass-yellow) !important;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: var(--mass-yellow) !important;
+            text-shadow: 0 0 8px var(--mass-yellow) !important;
+        }
+
+        /* PAGE LOAD ANIMATION */
+        @keyframes massEntrance {
+            0% { transform: translateY(100px) scale(0.9); opacity: 0; filter: blur(10px); }
+            70% { transform: translateY(-10px) scale(1.02); opacity: 1; filter: blur(0); }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        @keyframes titleGlow {
+            0% { filter: drop-shadow(0 0 5px rgba(255,0,60,0.5)); }
+            50% { filter: drop-shadow(0 0 25px rgba(255,183,0,0.9)); }
+            100% { filter: drop-shadow(0 0 5px rgba(255,0,60,0.5)); }
+        }
+
+        .section-title {
+            background: var(--mass-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 3.5rem !important;
+            font-weight: 900 !important;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: titleGlow 2s infinite alternate !important;
+        }
+
+        .section-subtitle {
+            color: var(--mass-red) !important;
+            letter-spacing: 5px !important;
+            font-weight: 800 !important;
+            text-shadow: 0 0 10px var(--mass-red) !important;
+        }
+
+        .section-divider {
+            background: var(--mass-gradient) !important;
+            height: 4px !important;
+            width: 100px !important;
+            box-shadow: 0 0 15px var(--mass-yellow) !important;
+            transition: width 0.5s ease;
+        }
+
+        .section-header:hover .section-divider {
+            width: 250px !important;
+        }
+
+        .section-desc {
+            color: #fff !important;
+            font-size: 1.2rem !important;
+            font-weight: 300;
+        }
+
+        /* MASS CARD HOVER TRANSITIONS */
+        .team-grid {
+            perspective: 1000px;
+        }
+
+        .member-card {
+            border: 2px solid rgba(255,0,60,0.3) !important;
+            background: rgba(20,0,5,0.8) !important;
+            box-shadow: 0 10px 30px rgba(255,0,60,0.1) !important;
+            opacity: 0; 
+            animation: massEntrance 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            animation-delay: 0.2s; /* Starts after page load */
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                        box-shadow 0.4s ease, 
+                        border-color 0.4s ease !important;
+            transform-style: preserve-3d;
+        }
+
+        .member-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .member-card:hover {
+            transform: translateY(-15px) scale(1.05) rotateX(5deg) !important;
+            border-color: var(--mass-yellow) !important;
+            box-shadow: 0 20px 50px rgba(255, 183, 0, 0.5), inset 0 0 30px rgba(255,0,60,0.6) !important;
+            z-index: 10;
+        }
+
+        .card-glow {
+            background: var(--mass-gradient) !important;
+            opacity: 0.3 !important;
+            transition: opacity 0.4s ease !important;
+        }
+
+        .member-card:hover .card-glow {
+            opacity: 0.8 !important;
+        }
+
+        .member-tag {
+            background: var(--mass-red) !important;
+            color: #fff !important;
+            box-shadow: 0 0 10px var(--mass-red) !important;
+            font-weight: 800 !important;
+        }
+
+        .member-name {
+            color: var(--mass-yellow) !important;
+            font-size: 2.2rem !important;
+            font-weight: 900 !important;
+            text-transform: uppercase !important;
+            text-shadow: 0 0 5px rgba(255,183,0,0.5) !important;
+            transition: text-shadow 0.3s ease !important;
+        }
+
+        .member-card:hover .member-name {
+            text-shadow: 0 0 20px rgba(255,183,0,1) !important;
+        }
+
+        .member-role {
+            color: #fff !important;
+            font-weight: 500 !important;
+        }
+
+        .member-skills span {
+            border-color: var(--mass-yellow) !important;
+            color: var(--mass-yellow) !important;
+            background: rgba(255,183,0,0.1) !important;
+            font-weight: 700 !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .member-card:hover .member-skills span {
+            background: rgba(255,183,0,0.3) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(255,183,0,0.3) !important;
+        }
+
+        /* BUTTON MASS PULSE */
+        @keyframes pulseMass {
+            0% { box-shadow: 0 0 10px rgba(255,183,0,0.2); }
+            50% { box-shadow: 0 0 25px rgba(255,183,0,0.8); }
+            100% { box-shadow: 0 0 10px rgba(255,183,0,0.2); }
+        }
+
+        .btn-secondary {
+            background: transparent !important;
+            border: 2px solid var(--mass-yellow) !important;
+            color: var(--mass-yellow) !important;
+            font-weight: 800 !important;
+            box-shadow: 0 0 10px rgba(255,183,0,0.2) !important;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+            animation: pulseMass 2s infinite !important;
+        }
+
+        .btn-secondary:hover {
+            background: var(--mass-yellow) !important;
+            color: #000 !important;
+            transform: scale(1.1) !important;
+            box-shadow: 0 0 30px var(--mass-yellow), 0 0 15px var(--mass-red) !important;
+            animation: none !important; /* Stop pulse to focus on hover scale */
+        }
+
+        .mouse-glow {
+            background: radial-gradient(circle, rgba(255,0,60,0.8) 0%, rgba(255,183,0,0) 70%) !important;
+        }
+
+        /* Full page flash overlay for click */
+        #flashOverlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(255, 183, 0, 0.8);
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.1s ease-out;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Mouse Glowing Aura -->
+    <div id="flashOverlay"></div>
     <div class="mouse-glow" id="mouseGlow"></div>
 
-    <!-- ==================== STICKY HEADER & NAVBAR ==================== -->
     <header class="main-header">
         <div class="header-container">
             <a href="index.html" class="logo-link">
@@ -27,64 +225,65 @@
                 </div>
             </a>
             
-            <!-- Mobile Toggle -->
             <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
             </button>
 
-            <!-- Navigation Links -->
             <nav class="main-nav" id="mainNav">
                 <ul>
                     <li><a href="index.html#about" class="nav-item">Brotherhood</a></li>
                     <li><a href="index.html#team" class="nav-item">Collective</a></li>
-                    <li><a href="projects.html" class="nav-item">Projects</a></li>
+                    <li><a href="projects.html" class="nav-item active">Projects</a></li>
                     <li><a href="index.html#contact" class="btn-collab">Start Collaboration</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <main style="padding-top: 120px;">
+    <main style="padding-top: 120px; padding-bottom: 100px;">
         <section class="team-section" id="projects-list">
             <div class="container">
                 <div class="section-header center">
-                    <span class="section-subtitle">OUR WORK</span>
-                    <h2 class="section-title">Client Projects & Portfolios</h2>
+                    <span class="section-subtitle">OUR MASTERPIECES</span>
+                    <h2 class="section-title">Client Projects</h2>
                     <div class="section-divider"></div>
                     <p class="section-desc">
-                        Explore the custom portfolios, dashboards, and digital products we have engineered for our clients.
+                        Explore the high-octane portfolios, dashboards, and digital products engineered by SPARK R&D LABS.
                     </p>
                 </div>
                 
                 <div class="team-grid">
                     <!-- Project Card: Vimal S -->
-                    <div class="member-card filter-item" data-tilt onclick="window.open('/vimal-portfolio/', '_blank')" style="cursor: pointer;">
-                        <div class="card-glow blue"></div>
+                    <div class="member-card filter-item" data-tilt onclick="handleCardClick('/vimal-portfolio/')" style="cursor: pointer;">
+                        <div class="card-glow"></div>
                         <div class="member-info" style="margin-top: 20px;">
-                            <span class="member-tag tag-blue">PORTFOLIO SITE</span>
+                            <span class="member-tag">LIVE</span>
                             <h3 class="member-name">Vimal S</h3>
                             <h4 class="member-role">Personal Creative Portfolio</h4>
-                            <div class="member-skills" style="margin-top: 15px;">
+                            <div class="member-skills" style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px;">
                                 <span>HTML/CSS</span>
                                 <span>JavaScript</span>
                                 <span>Responsive</span>
                                 <span>Video Embeds</span>
                             </div>
-                            <div style="margin-top: 25px;">
-                                <a href="/vimal-portfolio/" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">View Project</a>
+                            <div style="margin-top: 30px;">
+                                <a href="javascript:void(0)" class="btn btn-secondary">View Project 🚀</a>
                             </div>
                         </div>
                     </div>
                     
                     <!-- Placeholder for future projects -->
-                    <div class="member-card filter-item" data-tilt style="opacity: 0.5;">
-                        <div class="card-glow cyan"></div>
+                    <div class="member-card filter-item" data-tilt style="opacity: 0.6; cursor: not-allowed;" onclick="playErrorSound()">
+                        <div class="card-glow"></div>
                         <div class="member-info" style="margin-top: 20px;">
-                            <span class="member-tag tag-cyan">COMING SOON</span>
-                            <h3 class="member-name">New Project</h3>
-                            <h4 class="member-role">In Development...</h4>
+                            <span class="member-tag" style="background: #333 !important; color: #888 !important; box-shadow: none !important;">IN LAB</span>
+                            <h3 class="member-name" style="color: #666 !important; text-shadow: none !important;">Classified</h3>
+                            <h4 class="member-role" style="color: #555 !important;">Next Generation Dashboard</h4>
+                            <div style="margin-top: 30px;">
+                                <a href="javascript:void(0)" class="btn btn-secondary" style="border-color: #444 !important; color: #444 !important; box-shadow: none !important; pointer-events: none; animation: none !important;">Coming Soon ⏳</a>
+                            </div>
                         </div>
                     </div>
                     
@@ -92,6 +291,104 @@
             </div>
         </section>
     </main>
+
+    <!-- MASS SOUND EFFECTS (Synthesized Web Audio API) -->
+    <script>
+        // Use Web Audio API to create futuristic MASS sounds without external files
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playHoverSound() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            
+            // Electronic swoosh sound
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            osc.type = 'sawtooth';
+            // Start low, pitch up quickly
+            osc.frequency.setValueAtTime(100, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.15);
+            
+            // Fade out
+            gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+            
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.15);
+        }
+
+        function playClickSound() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            
+            // Heavy Bass Drop / Sci-fi Thud
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            osc.type = 'square';
+            // Start mid, pitch down aggressively
+            osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(20, audioCtx.currentTime + 0.4);
+            
+            // Loud impact, then fade
+            gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
+            
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.4);
+        }
+
+        function playErrorSound() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(100, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.2);
+        }
+
+        function handleCardClick(url) {
+            // Play massive sound
+            playClickSound();
+            
+            // Trigger visual flash
+            const flash = document.getElementById('flashOverlay');
+            flash.style.opacity = '1';
+            
+            // Fade out flash
+            setTimeout(() => {
+                flash.style.opacity = '0';
+            }, 100);
+
+            // Wait for sound and flash, then redirect
+            setTimeout(() => {
+                window.open(url, '_blank');
+            }, 300);
+        }
+
+        // Attach hover sounds to interactive elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.member-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', playHoverSound);
+            });
+            
+            const buttons = document.querySelectorAll('.btn-secondary');
+            buttons.forEach(btn => {
+                btn.addEventListener('mouseenter', playHoverSound);
+            });
+        });
+    </script>
 
     <script src="script.js"></script>
 </body>

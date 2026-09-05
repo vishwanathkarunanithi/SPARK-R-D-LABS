@@ -208,7 +208,8 @@ function encodeTestCode(config) {
         const payload = JSON.stringify({
             t: config.testId,
             d: parseInt(config.duration),
-            s: config.startTime ? new Date(config.startTime).getTime() : 0
+            s: config.startTime ? new Date(config.startTime).getTime() : 0,
+            q: parseInt(config.questionCount) || 0
         });
         return btoa(payload).replace(/=/g, '');
     } catch (e) {
@@ -226,21 +227,29 @@ function decodeTestCode(codeStr) {
         return {
             testId: parsed.t || "All",
             duration: parseInt(parsed.d) || 60,
-            startTime: parsed.s || 0
+            startTime: parsed.s || 0,
+            questionCount: parsed.q || 0
         };
     } catch (e) {
         return {
             testId: codeStr.trim(),
             duration: 60,
-            startTime: 0
+            startTime: 0,
+            questionCount: 0
         };
     }
 }
 
 // Question Selector: Enforces Syllabus Weightage, Max 10 Theory, Mixed Shuffling
 function selectQuestions(allQs, testConfig) {
-    if (testConfig.testId && (testConfig.testId.startsWith('Company Specific') || testConfig.testId.startsWith('Industry Specific'))) {
-        return [...allQs].filter(q => q.topic === testConfig.testId);
+    if (testConfig.testId && testConfig.testId !== "All") {
+        const topics = Array.isArray(testConfig.testId) ? testConfig.testId : [testConfig.testId];
+        let filtered = [...allQs].filter(q => topics.includes(q.topic));
+        filtered = shuffleArray(filtered);
+        if (testConfig.questionCount && testConfig.questionCount > 0) {
+            return filtered.slice(0, testConfig.questionCount);
+        }
+        return filtered;
     }
     let pool = shuffleArray([...allQs]);
     
@@ -334,11 +343,10 @@ async function initApp() {
 
     setupRealtimeChannel();
 
-    // Setup Admin Test Selector options (Mock Test 1 to 25)
+    // Setup Admin Test Selector options
     const adminTestSelect = document.getElementById('admin-test-select');
+    const adminAnswerTestSelect = document.getElementById('admin-answer-test-select');
     if (adminTestSelect) {
-        // Mock Tests 1-25 are hidden as requested
-        
         // Add specific tests dynamically
         if (allQuestions && allQuestions.length > 0) {
             const specificTopics = [...new Set(allQuestions.map(q => q.topic))].filter(t => t && (t.startsWith('Company Specific') || t.startsWith('Industry Specific') || t.startsWith('CLAD ')));
@@ -347,8 +355,109 @@ async function initApp() {
                 opt.value = topic;
                 opt.textContent = topic;
                 adminTestSelect.appendChild(opt);
+                
+                if (adminAnswerTestSelect) {
+                    const opt2 = document.createElement('option');
+                    opt2.value = topic;
+                    opt2.textContent = topic;
+                    adminAnswerTestSelect.appendChild(opt2);
+                }
             });
         }
+    }
+
+    // Answer Key Management Logic
+    const loadAnswersBtn = document.getElementById('admin-load-answers-btn');
+    if (loadAnswersBtn) {
+        loadAnswersBtn.addEventListener('click', () => {
+            const topic = document.getElementById('admin-answer-test-select').value;
+            if (!topic) return;
+            
+            const editor = document.getElementById('admin-answer-editor');
+            const list = document.getElementById('admin-answer-questions-list');
+            const refText = document.getElementById('admin-answer-reference');
+            
+            editor.style.display = 'block';
+            list.innerHTML = '';
+            
+            // Map topic to reference folder for Admin reference
+            const referenceMap = {
+                "CLAD Practice Test 1": "CLAD PRACTICE QUESTIONS indravarun",
+                "CLAD Practice Test 2": "CLAD 40 QUESTIONS indra",
+                "CLAD Practice Test 3": "CLAD QUESTIONS padmakshya",
+                "CLAD Practice Test 4": "cladwithans pavitra(1)",
+                "CLAD Practice Test 5": "NI MOCK TES supriya1",
+                "Industry Specific Test": "answer key/question/QB3.pdf"
+            };
+            
+            refText.textContent = referenceMap[topic] ? `Reference Source: ${referenceMap[topic]}` : `Reference Source: ${topic}`;
+            
+            const qs = allQuestions.filter(q => q.topic === topic).sort((a,b) => (a.original_q_num || 0) - (b.original_q_num || 0));
+            
+            qs.forEach((q, index) => {
+                const qDiv = document.createElement('div');
+                qDiv.style.marginBottom = '20px';
+                qDiv.style.paddingBottom = '15px';
+                qDiv.style.borderBottom = '1px solid #e2e8f0';
+                
+                let html = `<div style="font-weight: 600; margin-bottom: 8px;">Question ${q.original_q_num || (index+1)} (ID: ${q.id})</div>`;
+                
+                // Question Text & Image
+                if (q.text) html += `<div style="margin-bottom: 8px; font-size: 0.9rem;">${q.text.replace(/\n/g, '<br>')}</div>`;
+                if (q.image && q.image.length > 0) {
+                    q.image.forEach(img => {
+                        html += `<img src="${img}" style="max-height: 150px; max-width: 100%; display: block; margin-bottom: 8px; border-radius: 4px;">`;
+                    });
+                }
+                
+                // Options as radio buttons
+                html += `<div style="display: flex; flex-direction: column; gap: 6px;">`;
+                (q.options || []).forEach((opt, optIdx) => {
+                    const isChecked = q.correctAnswer === optIdx ? 'checked' : '';
+                    html += `
+                        <label style="display: flex; align-items: flex-start; gap: 8px; font-size: 0.9rem; cursor: pointer; padding: 4px; border-radius: 4px; ${isChecked ? 'background: #dcfce7;' : ''}">
+                            <input type="radio" name="admin_ans_${q.id}" value="${optIdx}" ${isChecked} style="margin-top: 4px;">
+                            <div>${opt}</div>
+                        </label>
+                    `;
+                });
+                html += `</div>`;
+                
+                qDiv.innerHTML = html;
+                
+                // Add event listener to highlight selected background
+                const radios = qDiv.querySelectorAll(`input[name="admin_ans_${q.id}"]`);
+                radios.forEach(r => {
+                    r.addEventListener('change', (e) => {
+                        qDiv.querySelectorAll('label').forEach(l => l.style.background = 'transparent');
+                        e.target.closest('label').style.background = '#dcfce7';
+                        
+                        // Update in memory immediately
+                        const selectedVal = parseInt(e.target.value);
+                        const globalQ = allQuestions.find(gq => gq.id === q.id);
+                        if (globalQ) {
+                            globalQ.correctAnswer = selectedVal;
+                        }
+                    });
+                });
+                
+                list.appendChild(qDiv);
+            });
+        });
+        
+        document.getElementById('admin-save-answers-btn').addEventListener('click', () => {
+            alert('Answer keys saved to browser memory! This will apply for any test taken on this device.\n\nTo apply it for everyone, click "Export Database" and replace questions.json.');
+        });
+        
+        document.getElementById('admin-export-db-btn').addEventListener('click', () => {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(allQuestions, null, 2));
+            const downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute("href",     dataStr);
+            downloadAnchorNode.setAttribute("download", "questions.json");
+            document.body.appendChild(downloadAnchorNode);
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+        });
     }
 
     // Setup Default Start Time in Admin to now
@@ -456,14 +565,20 @@ function setupEventListeners() {
         }
         // ----------------------------------------
 
-        const testId = document.getElementById('admin-test-select').value;
+        const testSelect = document.getElementById('admin-test-select');
+        const selectedOptions = Array.from(testSelect.selectedOptions).map(opt => opt.value);
+        let testId = selectedOptions.includes("All") ? "All" : selectedOptions;
+        if (selectedOptions.length === 1) testId = selectedOptions[0];
+
         const duration = document.getElementById('admin-test-duration').value;
         const startTimeVal = document.getElementById('admin-start-time').value;
+        const qCountVal = document.getElementById('admin-test-question-count').value;
 
         const config = {
             testId: testId,
             duration: duration,
-            startTime: startTimeVal
+            startTime: startTimeVal,
+            questionCount: qCountVal
         };
 
         const code = encodeTestCode(config);
@@ -508,6 +623,133 @@ function setupEventListeners() {
     // Student Screen
     document.getElementById('student-back-btn').addEventListener('click', () => showScreen('welcome'));
     
+    // Student History Logic
+    document.getElementById('student-history-btn').addEventListener('click', () => {
+        showScreen('student-history');
+        renderHistoryList();
+    });
+    
+    document.getElementById('history-back-btn').addEventListener('click', () => showScreen('student-entry'));
+    document.getElementById('history-detail-back-btn').addEventListener('click', () => {
+        document.getElementById('history-detail').style.display = 'none';
+        document.getElementById('history-list').style.display = 'grid';
+    });
+    
+    function renderHistoryList() {
+        const listDiv = document.getElementById('history-list');
+        listDiv.style.display = 'grid';
+        document.getElementById('history-detail').style.display = 'none';
+        
+        let history = [];
+        try { history = JSON.parse(localStorage.getItem('studentTestLogs') || '[]'); } catch(e){}
+        
+        if (history.length === 0) {
+            listDiv.innerHTML = '<div style="padding: 2rem; text-align: center; color: var(--text-muted); background: #f8fafc; border-radius: var(--radius-sm);">No assessment history found on this device.</div>';
+            return;
+        }
+        
+        // Sort newest first
+        history.reverse();
+        
+        listDiv.innerHTML = history.map((log, index) => {
+            const dateStr = new Date(log.date).toLocaleString();
+            return `
+                <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1.25rem; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                    <div>
+                        <h4 style="margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #0f172a;">${log.testTitle}</h4>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); display: flex; gap: 15px;">
+                            <span>📅 ${dateStr}</span>
+                            <span>🎯 Score: <strong>${log.score}%</strong></span>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary view-history-btn" data-index="${index}">View Review</button>
+                </div>
+            `;
+        }).join('');
+        
+        document.querySelectorAll('.view-history-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const idx = e.target.getAttribute('data-index');
+                renderHistoryDetail(history[idx]);
+            });
+        });
+    }
+    
+    function renderHistoryDetail(log) {
+        document.getElementById('history-list').style.display = 'none';
+        const detailDiv = document.getElementById('history-detail');
+        const contentDiv = document.getElementById('history-detail-content');
+        detailDiv.style.display = 'block';
+        
+        let html = `
+            <div style="background: #f8fafc; padding: 1.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); margin-bottom: 1.5rem;">
+                <h3 style="margin: 0 0 0.5rem 0; color: #0f172a;">${log.testTitle}</h3>
+                <p style="margin: 0; color: var(--text-secondary);">Date: ${new Date(log.date).toLocaleString()} | Score: <strong>${log.score}%</strong></p>
+            </div>
+        `;
+        
+        const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
+        
+        (log.questions || []).forEach((q, i) => {
+            const hasAnswer = q.correctAnswer !== undefined && q.correctAnswer !== null;
+            const isCorrect = hasAnswer ? q.userAns === q.correctAnswer : false;
+            
+            let optText = q.userAns !== null ? q.options[q.userAns] || "Not Answered" : "Not Answered";
+            let correctOptText = hasAnswer ? (q.options[q.correctAnswer] || "N/A") : "Unknown";
+
+            if (typeof optText === 'string' && optText.startsWith('IMAGE: ')) optText = "[Image Option]";
+            if (typeof correctOptText === 'string' && correctOptText.startsWith('IMAGE: ')) correctOptText = "[Image Option]";
+
+            let userAnsText = q.userAns !== null ? `${letters[q.userAns]}) ${optText}` : 'Not Answered';
+            let correctAnsText = hasAnswer ? `${letters[q.correctAnswer]}) ${correctOptText}` : 'Please search and find the answer.';
+
+            html += `
+                <div style="margin-bottom: 20px; padding: 15px; border: 1px solid #e2e8f0; border-radius: 8px; background: #ffffff;">
+                    <div style="font-weight: 600; margin-bottom: 10px;">Q${i + 1}: ${q.text.replace(/\\n/g, '<br>')}</div>
+            `;
+            
+            if (q.image && q.image.length > 0) {
+                q.image.forEach(img => {
+                    html += `<img src="${img}" style="max-height: 150px; max-width: 100%; display: block; margin-bottom: 10px; border-radius: 4px;">`;
+                });
+            }
+            
+            html += `
+                    <div style="background: #f8fafc; padding: 10px; border-radius: 4px; border-left: 4px solid ${hasAnswer && !isCorrect ? '#ef4444' : '#10b981'}; margin-bottom: 8px;">
+                        <strong>Your Answer:</strong> ${userAnsText}
+                    </div>
+            `;
+            
+            if (hasAnswer && !isCorrect) {
+                html += `
+                    <div style="background: #f0fdf4; padding: 10px; border-radius: 4px; border-left: 4px solid #10b981; margin-bottom: 8px;">
+                        <strong>Correct Answer:</strong> ${correctAnsText}
+                    </div>
+                `;
+            }
+            
+            if (!hasAnswer) {
+                html += `
+                    <div style="background: #f1f5f9; padding: 10px; border-radius: 4px; border-left: 4px solid #64748b; margin-bottom: 8px; color: #475569;">
+                        <strong>Note:</strong> ${correctAnsText}
+                    </div>
+                `;
+            }
+            
+            if (q.explanation) {
+                html += `
+                    <div style="background: #fffbeb; padding: 10px; border-radius: 4px; border-left: 4px solid #f59e0b; margin-top: 10px; font-size: 0.9rem;">
+                        <strong>Explanation:</strong> ${q.explanation}
+                    </div>
+                `;
+            }
+            
+            html += `</div>`;
+        });
+        
+        contentDiv.innerHTML = html;
+    }
+
     document.getElementById('btn-validate-code').addEventListener('click', () => {
         const code = document.getElementById('student-test-code').value.trim();
         validateAndApplyTestCode(code);
@@ -982,6 +1224,37 @@ function finishAssessment() {
     document.getElementById('cert-class').textContent = `${studentInfo.cls} - ${studentInfo.sec}`;
     document.getElementById('cert-score').textContent = `${percentage}%`;
     document.getElementById('cert-date').textContent = currentDate;
+
+    // Save to Student History Log (localStorage)
+    try {
+        const history = JSON.parse(localStorage.getItem('studentTestLogs') || '[]');
+        let testTitle = "Assessment";
+        if (activeTestConfig.testId === "All") {
+            testTitle = "Standard CLAD Weightage Exam";
+        } else if (Array.isArray(activeTestConfig.testId)) {
+            testTitle = activeTestConfig.testId.join(" + ");
+        } else {
+            testTitle = activeTestConfig.testId;
+        }
+        
+        history.push({
+            date: new Date().toISOString(),
+            testTitle: testTitle,
+            score: percentage,
+            questions: questions.map((q, i) => ({
+                id: q.id,
+                text: q.text,
+                image: q.image,
+                options: q.options,
+                userAns: userAnswers[i],
+                correctAnswer: q.correctAnswer,
+                explanation: q.explanation
+            }))
+        });
+        localStorage.setItem('studentTestLogs', JSON.stringify(history));
+    } catch (e) {
+        console.error("Could not save history to localStorage", e);
+    }
 
     const payload = {
         testId: studentInfo.testId,

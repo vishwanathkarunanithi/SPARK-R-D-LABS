@@ -126,11 +126,16 @@
                         </div>
                         
                         <div class="form-group">
-                            <label for="admin-test-select">Select Mock Test Dataset:</label>
-                            <select id="admin-test-select" class="select-field">
-                                <option value="All">All Topics (Standard CLAD Weightage - 40 Qs)</option>
-                                <!-- Mock 1 to 25 populated by JS -->
+                            <label for="admin-test-select">Select Test Datasets (Hold Ctrl to select multiple):</label>
+                            <select id="admin-test-select" class="select-field" multiple size="4" style="height: auto; min-height: 100px;">
+                                <option value="All" selected>All Topics (Standard CLAD Weightage - 40 Qs)</option>
+                                <!-- Topics populated by JS -->
                             </select>
+                        </div>
+                        
+                        <div class="form-group" style="margin-top: 1rem;">
+                            <label for="admin-test-question-count">Total Questions to Pull:</label>
+                            <input type="number" id="admin-test-question-count" class="input-field" value="40" min="1" max="200">
                         </div>
 
                         <div class="form-row">
@@ -194,6 +199,40 @@
                         </button>
                     </div>
                 </div>
+                </div>
+                
+                <!-- Answer Key Management Section -->
+                <div style="background: #f8fafc; padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: space-between; margin-top: 1.5rem; grid-column: 1 / -1;">
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 1rem;">
+                            <span style="font-size: 1.25rem;">🔑</span>
+                            <h3 style="font-size: 1.1rem; font-weight: 700; color: #b91c1c;">Answer Key Management</h3>
+                        </div>
+                        <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+                            Review and update the correct answers for each test. These answers will be set as the default for all students evaluating against this test.
+                        </p>
+                        
+                        <div class="form-group">
+                            <label for="admin-answer-test-select">Select Test to Manage:</label>
+                            <select id="admin-answer-test-select" class="select-field">
+                                <!-- Populated by JS -->
+                            </select>
+                        </div>
+                        
+                        <button id="admin-load-answers-btn" class="btn btn-secondary" style="margin-top: 0.5rem;">Load Questions</button>
+                    </div>
+
+                    <div id="admin-answer-editor" style="display: none; margin-top: 1.5rem; background: #ffffff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                        <p id="admin-answer-reference" style="font-size: 0.85rem; font-weight: bold; color: var(--primary); margin-bottom: 1rem;"></p>
+                        <div id="admin-answer-questions-list" style="max-height: 400px; overflow-y: auto; margin-bottom: 1rem; padding-right: 0.5rem;">
+                            <!-- Questions loaded here -->
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <button id="admin-save-answers-btn" class="btn btn-primary" style="flex: 1;">Save Answer Key (Local)</button>
+                            <button id="admin-export-db-btn" class="btn btn-success" style="flex: 1;" title="Download the updated questions.json file to permanently save changes">📥 Export Database</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- 4. STUDENT / GUEST ENTRY SCREEN -->
@@ -203,7 +242,10 @@
                         <h2 style="font-size: 1.5rem; font-weight: 800; color: #0f172a;">Candidate Assessment</h2>
                         <p style="color: var(--text-secondary); font-size: 0.85rem;">National Instruments CLAD Certification</p>
                     </div>
-                    <button id="student-back-btn" class="btn btn-secondary" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">Back</button>
+                    <div>
+                        <button id="student-history-btn" class="btn btn-primary" style="padding: 0.35rem 0.75rem; font-size: 0.8rem; margin-right: 5px;">📜 My History Logs</button>
+                        <button id="student-back-btn" class="btn btn-secondary" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">Back</button>
+                    </div>
                 </div>
 
                 <!-- Test Code Input Box -->
@@ -252,7 +294,29 @@
                 </div>
             </div>
 
-            <!-- 5. TEST SCREEN -->
+            <!-- STUDENT HISTORY SCREEN -->
+            <div id="student-history-screen" class="screen portal-card" style="max-width: 800px; margin: 0 auto; display: none;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <div>
+                        <h2 style="font-size: 1.5rem; font-weight: 800; color: #0f172a;">My Assessment History</h2>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem;">Review your past tests, selected answers, and correct explanations</p>
+                    </div>
+                    <button id="history-back-btn" class="btn btn-secondary" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;">Back</button>
+                </div>
+                
+                <!-- List of past tests -->
+                <div id="history-list" style="display: grid; gap: 15px;">
+                    <!-- Populated by JS -->
+                </div>
+
+                <!-- Detailed review for a specific test -->
+                <div id="history-detail" style="display: none;">
+                    <button id="history-detail-back-btn" class="btn btn-secondary" style="margin-bottom: 1rem;">⬅ Back to History List</button>
+                    <div id="history-detail-content"></div>
+                </div>
+            </div>
+
+            <!-- 5. MAIN ASSESSMENT SCREEN -->
             <div id="test-screen" class="screen">
                 <div class="card-header">
                     <div>

@@ -159,7 +159,19 @@
                             🔒 <strong>Start Control:</strong> Students opening before the Start Time are locked out.
                         </p>
 
-                        <button id="admin-generate-code-btn" class="btn btn-primary btn-block">Generate Access Code & Link</button>
+                        <div style="display: flex; gap: 10px; margin-bottom: 1rem;">
+                            <button id="admin-review-qs-btn" class="btn btn-secondary" style="flex: 1;">📝 Review & Edit Questions</button>
+                            <button id="admin-generate-code-btn" class="btn btn-primary" style="flex: 1;">Generate Access Code & Link</button>
+                        </div>
+                        
+                        <div id="admin-question-filter-container" style="display: none; background: #ffffff; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); margin-bottom: 1rem;">
+                            <h4 style="margin: 0 0 0.5rem 0; font-size: 0.95rem; color: #0f172a;">Exclude Questions</h4>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.75rem;">Uncheck questions to exclude them from the generated test.</p>
+                            <div id="admin-question-filter-list" style="max-height: 250px; overflow-y: auto; font-size: 0.85rem; border: 1px solid #e2e8f0; padding: 0.5rem; border-radius: 4px;">
+                                <!-- Checkboxes populated by JS -->
+                            </div>
+                            <button id="admin-apply-filter-btn" class="btn btn-success" style="width: 100%; margin-top: 0.75rem; padding: 0.4rem;">Done</button>
+                        </div>
 
                         <!-- Generated Output -->
                         <div id="generated-code-box" style="display: none; margin-top: 1.25rem; background: #ffffff; padding: 1.1rem; border-radius: var(--radius-sm); border: 1.5px dashed var(--primary);">
@@ -198,7 +210,6 @@
                             📈 Open Google Sheet Live Scores
                         </button>
                     </div>
-                </div>
                 </div>
                 
                 <!-- Answer Key Management Section -->

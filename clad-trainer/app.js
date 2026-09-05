@@ -235,24 +235,35 @@ function decodeTestCode(codeStr) {
             testId: codeStr.trim(),
             duration: 60,
             startTime: 0,
-            questionCount: 0
+            questionCount: 0,
+            excluded: []
         };
     }
 }
 
 // Question Selector: Enforces Syllabus Weightage, Max 10 Theory, Mixed Shuffling
 function selectQuestions(allQs, testConfig) {
-    if (testConfig.testId && testConfig.testId !== "All") {
-        const topics = Array.isArray(testConfig.testId) ? testConfig.testId : [testConfig.testId];
-        let filtered = [...allQs].filter(q => topics.includes(q.topic));
-        filtered = shuffleArray(filtered);
-        if (testConfig.questionCount && testConfig.questionCount > 0) {
-            return filtered.slice(0, testConfig.questionCount);
-        }
-        return filtered;
+    let pool = [];
+    if (testConfig.testId === "All") {
+        pool = [...allQs];
+    } else if (Array.isArray(testConfig.testId)) {
+        pool = allQs.filter(q => testConfig.testId.includes(q.topic));
+    } else {
+        pool = allQs.filter(q => q.topic === testConfig.testId);
     }
-    let pool = shuffleArray([...allQs]);
     
+    if (testConfig.excluded && testConfig.excluded.length > 0) {
+        pool = pool.filter(q => !testConfig.excluded.includes(q.id));
+    }
+    
+    if (testConfig.testId !== "All" && !(Array.isArray(testConfig.testId))) {
+        pool = shuffleArray(pool);
+        if (testConfig.questionCount && testConfig.questionCount > 0) {
+            return pool.slice(0, testConfig.questionCount);
+        }
+        return pool;
+    }
+
     let groupedTheory = {};
     let groupedPractical = {};
     
@@ -410,13 +421,20 @@ async function initApp() {
                     });
                 }
                 
-                // Options as radio buttons
+                // Options as radio/checkbox
                 html += `<div style="display: flex; flex-direction: column; gap: 6px;">`;
+                const inputType = q.multiSelect ? 'checkbox' : 'radio';
                 (q.options || []).forEach((opt, optIdx) => {
-                    const isChecked = q.correctAnswer === optIdx ? 'checked' : '';
+                    let isChecked = false;
+                    if (q.multiSelect) {
+                        const ca = Array.isArray(q.correctAnswer) ? q.correctAnswer : (q.correctAnswer !== undefined && q.correctAnswer !== null ? [q.correctAnswer] : []);
+                        isChecked = ca.includes(optIdx);
+                    } else {
+                        isChecked = q.correctAnswer === optIdx;
+                    }
                     html += `
                         <label style="display: flex; align-items: flex-start; gap: 8px; font-size: 0.9rem; cursor: pointer; padding: 4px; border-radius: 4px; ${isChecked ? 'background: #dcfce7;' : ''}">
-                            <input type="radio" name="admin_ans_${q.id}" value="${optIdx}" ${isChecked} style="margin-top: 4px;">
+                            <input type="${inputType}" name="admin_ans_${q.id}" value="${optIdx}" ${isChecked ? 'checked' : ''} style="margin-top: 4px;">
                             <div>${opt}</div>
                         </label>
                     `;
@@ -425,18 +443,26 @@ async function initApp() {
                 
                 qDiv.innerHTML = html;
                 
-                // Add event listener to highlight selected background
-                const radios = qDiv.querySelectorAll(`input[name="admin_ans_${q.id}"]`);
-                radios.forEach(r => {
+                // Add event listener to highlight selected background and save memory
+                const inputs = qDiv.querySelectorAll(`input[name="admin_ans_${q.id}"]`);
+                inputs.forEach(r => {
                     r.addEventListener('change', (e) => {
-                        qDiv.querySelectorAll('label').forEach(l => l.style.background = 'transparent');
-                        e.target.closest('label').style.background = '#dcfce7';
-                        
-                        // Update in memory immediately
-                        const selectedVal = parseInt(e.target.value);
                         const globalQ = allQuestions.find(gq => gq.id === q.id);
-                        if (globalQ) {
+                        if (!globalQ) return;
+                        
+                        if (q.multiSelect) {
+                            // Update backgrounds
+                            e.target.closest('label').style.background = e.target.checked ? '#dcfce7' : 'transparent';
+                            // Collect all checked values
+                            const checkedVals = Array.from(qDiv.querySelectorAll(`input[name="admin_ans_${q.id}"]:checked`)).map(cb => parseInt(cb.value));
+                            globalQ.correctAnswer = checkedVals;
+                            q.correctAnswer = checkedVals;
+                        } else {
+                            qDiv.querySelectorAll('label').forEach(l => l.style.background = 'transparent');
+                            e.target.closest('label').style.background = '#dcfce7';
+                            const selectedVal = parseInt(e.target.value);
                             globalQ.correctAnswer = selectedVal;
+                            q.correctAnswer = selectedVal;
                         }
                     });
                 });
@@ -541,6 +567,49 @@ function setupEventListeners() {
         endExamBtn.addEventListener('click', broadcastEndExam);
     }
 
+    let excludedQuestionIds = [];
+    
+    document.getElementById('admin-review-qs-btn').addEventListener('click', () => {
+        const selectElement = document.getElementById('admin-test-select');
+        const selectedOptions = Array.from(selectElement.selectedOptions).map(opt => opt.value);
+        if (selectedOptions.length === 0) {
+            alert('Please select at least one test dataset first.');
+            return;
+        }
+        
+        let pool = [];
+        if (selectedOptions.includes("All")) {
+            pool = [...allQuestions];
+        } else {
+            pool = allQuestions.filter(q => selectedOptions.includes(q.topic));
+        }
+        
+        const listDiv = document.getElementById('admin-question-filter-list');
+        listDiv.innerHTML = '';
+        pool.forEach((q, idx) => {
+            const isChecked = !excludedQuestionIds.includes(q.id) ? 'checked' : '';
+            listDiv.innerHTML += `
+                <label style="display: block; margin-bottom: 6px; cursor: pointer; padding: 4px; border-bottom: 1px solid #f1f5f9;">
+                    <input type="checkbox" value="${q.id}" class="q-filter-checkbox" ${isChecked} style="margin-right: 8px;">
+                    Q${idx+1} (ID: ${q.id}): ${q.text.substring(0, 80).replace(/\n/g, ' ')}...
+                </label>
+            `;
+        });
+        
+        document.getElementById('admin-question-filter-container').style.display = 'block';
+    });
+    
+    document.getElementById('admin-apply-filter-btn').addEventListener('click', () => {
+        excludedQuestionIds = [];
+        document.querySelectorAll('.q-filter-checkbox').forEach(cb => {
+            if (!cb.checked) {
+                excludedQuestionIds.push(parseInt(cb.value));
+            }
+        });
+        document.getElementById('admin-question-filter-container').style.display = 'none';
+        alert(`Excluded ${excludedQuestionIds.length} question(s). Generate the code now.`);
+    });
+
     // Admin Code Generation
     document.getElementById('admin-generate-code-btn').addEventListener('click', () => {
         // --- NEW: Reset Session Termination ---
@@ -565,8 +634,14 @@ function setupEventListeners() {
         }
         // ----------------------------------------
 
-        const testSelect = document.getElementById('admin-test-select');
-        const selectedOptions = Array.from(testSelect.selectedOptions).map(opt => opt.value);
+        const selectElement = document.getElementById('admin-test-select');
+        const selectedOptions = Array.from(selectElement.selectedOptions).map(opt => opt.value);
+
+        if (selectedOptions.length === 0) {
+            alert('Please select at least one test dataset.');
+            return;
+        }
+
         let testId = selectedOptions.includes("All") ? "All" : selectedOptions;
         if (selectedOptions.length === 1) testId = selectedOptions[0];
 
@@ -578,7 +653,8 @@ function setupEventListeners() {
             testId: testId,
             duration: duration,
             startTime: startTimeVal,
-            questionCount: qCountVal
+            questionCount: qCountVal,
+            excluded: excludedQuestionIds
         };
 
         const code = encodeTestCode(config);
@@ -1133,7 +1209,10 @@ function renderQuestion() {
 
     q.options.forEach((opt, idx) => {
         const optionDiv = document.createElement('div');
-        optionDiv.className = `option ${userAnswers[currentQuestionIndex] === idx ? 'selected' : ''}`;
+        const isSelected = q.multiSelect 
+            ? (Array.isArray(userAnswers[currentQuestionIndex]) && userAnswers[currentQuestionIndex].includes(idx))
+            : userAnswers[currentQuestionIndex] === idx;
+        optionDiv.className = `option ${isSelected ? 'selected' : ''}`;
 
         let optContent = opt;
         if (typeof opt === 'string' && opt.startsWith('IMAGE: ')) {
@@ -1147,7 +1226,27 @@ function renderQuestion() {
         `;
 
         optionDiv.addEventListener('click', () => {
-            userAnswers[currentQuestionIndex] = idx;
+            if (q.multiSelect) {
+                if (!Array.isArray(userAnswers[currentQuestionIndex])) {
+                    userAnswers[currentQuestionIndex] = [];
+                }
+                const ansArray = userAnswers[currentQuestionIndex];
+                if (ansArray.includes(idx)) {
+                    ansArray.splice(ansArray.indexOf(idx), 1);
+                } else {
+                    ansArray.push(idx);
+                }
+            } else {
+                userAnswers[currentQuestionIndex] = idx;
+            }
+            const logEntry = {
+                timestamp: new Date().toISOString(),
+                studentId: studentInfo.reg,
+                questionId: q.id,
+                action: 'answered',
+                selectedOption: userAnswers[currentQuestionIndex]
+            };
+            publishLog(logEntry);
             renderQuestion();
         });
 
@@ -1174,16 +1273,41 @@ function finishAssessment() {
 
     questions.forEach((q, i) => {
         const userAns = userAnswers[i];
-        if (userAns !== null) attemptedCount++;
+        if (userAns !== null && !(Array.isArray(userAns) && userAns.length === 0)) attemptedCount++;
         const hasAnswer = q.correctAnswer !== undefined && q.correctAnswer !== null;
-        const isCorrect = hasAnswer ? userAns === q.correctAnswer : false;
+        
+        let isCorrect = false;
+        if (hasAnswer) {
+            if (q.multiSelect) {
+                const ca = Array.isArray(q.correctAnswer) ? q.correctAnswer : [q.correctAnswer];
+                const ua = Array.isArray(userAns) ? userAns : (userAns !== null ? [userAns] : []);
+                isCorrect = (ca.length === ua.length) && ca.every(val => ua.includes(val));
+            } else {
+                isCorrect = userAns === q.correctAnswer;
+            }
+        }
         if (isCorrect) correctCount++;
 
         const item = document.createElement('div');
         item.className = `key-item ${hasAnswer ? (isCorrect ? 'correct' : 'incorrect') : 'unknown'}`;
 
-        let optText = userAns !== null ? q.options[userAns] || "Not Answered" : "Not Answered";
-        let correctOptText = hasAnswer ? (q.options[q.correctAnswer] || "N/A") : "Unknown";
+        let optText = "Not Answered";
+        if (userAns !== null && !(Array.isArray(userAns) && userAns.length === 0)) {
+            if (Array.isArray(userAns)) {
+                optText = userAns.map(a => q.options[a] || "Unknown").join(", ");
+            } else {
+                optText = q.options[userAns] || "Not Answered";
+            }
+        }
+        
+        let correctOptText = "Unknown";
+        if (hasAnswer) {
+            if (Array.isArray(q.correctAnswer)) {
+                correctOptText = q.correctAnswer.map(a => q.options[a] || "Unknown").join(", ");
+            } else {
+                correctOptText = q.options[q.correctAnswer] || "N/A";
+            }
+        }
 
         if (typeof optText === 'string' && optText.startsWith('IMAGE: ')) optText = "[Image Option]";
         if (typeof correctOptText === 'string' && correctOptText.startsWith('IMAGE: ')) correctOptText = "[Image Option]";

@@ -358,54 +358,24 @@ async function initApp() {
     const adminTestSelect = document.getElementById('admin-test-select');
     const adminAnswerTestSelect = document.getElementById('admin-answer-test-select');
     if (adminTestSelect) {
+        // Add specific tests dynamically
         if (allQuestions && allQuestions.length > 0) {
-            const allTopics = [...new Set(allQuestions.map(q => q.topic))].filter(t => t);
-
-            // --- Existing Tests (non-mock) ---
-            const existingTopics = allTopics.filter(t =>
-                (t.startsWith('Company Specific') || t.startsWith('Industry Specific') || t.startsWith('CLAD ')) &&
-                !t.startsWith('CLAD Mock Test')
-            );
-
-            // --- CLAD Mock Tests (separate section) ---
-            const mockTopics = allTopics
-                .filter(t => t.startsWith('CLAD Mock Test'))
-                .sort((a, b) => {
-                    const numA = parseInt(a.replace('CLAD Mock Test ', '')) || 0;
-                    const numB = parseInt(b.replace('CLAD Mock Test ', '')) || 0;
-                    return numA - numB;
-                });
-
-            function addToSelects(topics, groupLabel) {
-                [adminTestSelect, adminAnswerTestSelect].forEach(sel => {
-                    if (!sel) return;
-                    if (groupLabel) {
-                        const divider = document.createElement('option');
-                        divider.disabled = true;
-                        divider.textContent = `─── ${groupLabel} ───`;
-                        divider.style.fontWeight = '700';
-                        divider.style.color = '#0f172a';
-                        divider.style.background = '#f1f5f9';
-                        sel.appendChild(divider);
-                    }
-                    topics.forEach(topic => {
-                        const opt = document.createElement('option');
-                        opt.value = topic;
-                        opt.textContent = topic;
-                        sel.appendChild(opt);
-                    });
-                });
-            }
-
-            if (existingTopics.length > 0) {
-                addToSelects(existingTopics, 'Existing Tests');
-            }
-            if (mockTopics.length > 0) {
-                addToSelects(mockTopics, '🎯 CLAD Mock Tests (Answer-Verified)');
-            }
+            const specificTopics = [...new Set(allQuestions.map(q => q.topic))].filter(t => t && (t.startsWith('Company Specific') || t.startsWith('Industry Specific') || t.startsWith('CLAD ')));
+            specificTopics.forEach(topic => {
+                const opt = document.createElement('option');
+                opt.value = topic;
+                opt.textContent = topic;
+                adminTestSelect.appendChild(opt);
+                
+                if (adminAnswerTestSelect) {
+                    const opt2 = document.createElement('option');
+                    opt2.value = topic;
+                    opt2.textContent = topic;
+                    adminAnswerTestSelect.appendChild(opt2);
+                }
+            });
         }
     }
-
 
     // Answer Key Management Logic
     const loadAnswersBtn = document.getElementById('admin-load-answers-btn');
@@ -1269,6 +1239,7 @@ function renderQuestion() {
             } else {
                 userAnswers[currentQuestionIndex] = idx;
             }
+            /*
             const logEntry = {
                 timestamp: new Date().toISOString(),
                 studentId: studentInfo.reg,
@@ -1277,6 +1248,7 @@ function renderQuestion() {
                 selectedOption: userAnswers[currentQuestionIndex]
             };
             publishLog(logEntry);
+            */
             renderQuestion();
         });
 

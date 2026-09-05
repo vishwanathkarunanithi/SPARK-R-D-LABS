@@ -1,0 +1,111 @@
+CLAD Fix Report
+============================================================
+Input: 640 | Kept: 604 | Removed: 36
+
+ISSUES & FIXES:
+------------------------------------------------------------
+REMOVED Q32: Only 2 options — What value will be displayed in the numeric and numeric 2 in
+REMOVED Q50: Only 2 options — You customize a control, select Control from the Type Def. S
+REMOVED Q57: Only 3 options — It is possible to have two VIs of the same name in a project
+REMOVED Q72: Only 2 options — Can a wire be used to pass data between loops that are inten
+Q83: TRIMMED options from 6 to 4
+Q84: TRIMMED options from 5 to 4
+REMOVED Q100: Only 2 options — Data types indicate what objects, inputs, and outputs, you c
+REMOVED Q102: Only 2 options — What value will be displayed in the string indicator after t
+REMOVED Q190: Only 2 options — What value will be displayed in numeric indicator after the 
+REMOVED Q230: Only 2 options — LabVIEW store Boolean data as         bit value.
+REMOVED Q233: Only 2 options — What will be state in the output boolean indicator?
+REMOVED Q247: Only 2 options — You set a Breakpoint in the code contained within the False 
+Q610: TRIMMED options from 5 to 4
+Q612: TRIMMED options from 5 to 4
+Q619: REMOVED duplicate option: Test A | REMOVED duplicate option: Test C | REMOVED duplicate option: Test B | REMOVED duplicate option: Test C | TRIMMED options from 7 to 4
+Q622: TRIMMED options from 5 to 4
+Q710: TRIMMED options from 5 to 4
+Q712: TRIMMED options from 5 to 4
+Q719: REMOVED duplicate option: Test A | REMOVED duplicate option: Test C | REMOVED duplicate option: Test B | REMOVED duplicate option: Test C | TRIMMED options from 7 to 4
+Q722: TRIMMED options from 5 to 4
+Q726: TRIMMED options from 5 to 4
+REMOVED Q727: Only 1 options — Question #25
+When placed at the "INSERT CODE HERE" location,
+REMOVED Q728: Only 1 options — Question #26
+After running this VI, what is the value of Arr
+Q729: TRIMMED options from 5 to 4
+REMOVED Q730: Only 2 options — Question #28
+Your application has item prices stored as nume
+Q731: TRIMMED options from 6 to 4
+Q733: TRIMMED options from 5 to 4
+Q734: TRIMMED options from 6 to 4
+Q735: TRIMMED options from 5 to 4
+Q737: TRIMMED options from 9 to 4
+Q738: TRIMMED options from 7 to 4
+Q739: REMOVED duplicate option: Bottom of Form
+Q740: TRIMMED options from 5 to 4
+Q741: TRIMMED options from 5 to 4
+REMOVED Q742: Only 1 options — Question #40
+Which VI will generate this Waveform Graph valu
+REMOVED Q802: Only 2 options — Which Property Node can change the text color attributes of 
+REMOVED Q803: Only 2 options — Which of the following terminals cannot control how many tim
+REMOVED Q804: Only 3 options — What VI or function is typically used to display an error di
+REMOVED Q807: Only 2 options — The Control Refnum changes into that control
+REMOVED Q808: Only 2 options — D:
+REMOVED Q809: Only 2 options — D:
+REMOVED Q810: No question text after all fixes
+REMOVED Q815: Only 2 options — B:
+REMOVED Q816: Only 2 options — B:
+REMOVED Q817: Only 2 options — A:
+REMOVED Q818: No question text after all fixes
+REMOVED Q819: Only 1 options — Terminating the execution of a sequence structure before the
+REMOVED Q822: Only 2 options — B:
+REMOVED Q824: Only 1 options — What is the purpose of these block diagram toolbar buttons?
+REMOVED Q825: Only 2 options — To display the data flowing through wires as the VI runs
+REMOVED Q829: Only 1 options — Which VI will acquire 1000 samples immediately after PFI0 tr
+REMOVED Q834: Only 3 options — DBL  with value -4
+REMOVED Q835: Only 2 options — C:
+REMOVED Q836: Only 3 options — C:
+REMOVED Q837: Only 2 options — When clicking a broken run arrow, the Error list window show
+REMOVED Q841: No question text after all fixes
+REMOVED Q842: Only 1 options — What values will be displayed in the Output Cluster indicato
+
+
+REMOVED:
+------------------------------------------------------------
+ID=32: Only 2 options | What value will be displayed in the numeric and numeric 2 in
+ID=50: Only 2 options | You customize a control, select Control from the Type Def. S
+ID=57: Only 3 options | It is possible to have two VIs of the same name in a project
+ID=72: Only 2 options | Can a wire be used to pass data between loops that are inten
+ID=100: Only 2 options | Data types indicate what objects, inputs, and outputs, you c
+ID=102: Only 2 options | What value will be displayed in the string indicator after t
+ID=190: Only 2 options | What value will be displayed in numeric indicator after the 
+ID=230: Only 2 options | LabVIEW store Boolean data as         bit value.
+ID=233: Only 2 options | What will be state in the output boolean indicator?
+ID=247: Only 2 options | You set a Breakpoint in the code contained within the False 
+ID=727: Only 1 options | Question #25
+When placed at the "INSERT CODE HERE" location,
+ID=728: Only 1 options | Question #26
+After running this VI, what is the value of Arr
+ID=730: Only 2 options | Question #28
+Your application has item prices stored as nume
+ID=742: Only 1 options | Question #40
+Which VI will generate this Waveform Graph valu
+ID=802: Only 2 options | Which Property Node can change the text color attributes of 
+ID=803: Only 2 options | Which of the following terminals cannot control how many tim
+ID=804: Only 3 options | What VI or function is typically used to display an error di
+ID=807: Only 2 options | The Control Refnum changes into that control
+ID=808: Only 2 options | D:
+ID=809: Only 2 options | D:
+ID=810: No question text | 
+ID=815: Only 2 options | B:
+ID=816: Only 2 options | B:
+ID=817: Only 2 options | A:
+ID=818: No question text | 
+ID=819: Only 1 options | Terminating the execution of a sequence structure before the
+ID=822: Only 2 options | B:
+ID=824: Only 1 options | What is the purpose of these block diagram toolbar buttons?
+ID=825: Only 2 options | To display the data flowing through wires as the VI runs
+ID=829: Only 1 options | Which VI will acquire 1000 samples immediately after PFI0 tr
+ID=834: Only 3 options | DBL  with value -4
+ID=835: Only 2 options | C:
+ID=836: Only 3 options | C:
+ID=837: Only 2 options | When clicking a broken run arrow, the Error list window show
+ID=841: No question text | 
+ID=842: Only 1 options | What values will be displayed in the Output Cluster indicato

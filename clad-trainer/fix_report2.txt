@@ -1,0 +1,67 @@
+Fix Report v2
+============================================================
+Input: 604 | Kept: 575 | Removed: 29
+
+ISSUES:
+------------------------------------------------------------
+REMOVED Q89: Only 3 options after fixing
+REMOVED Q96: Only 0 options after fixing
+REMOVED Q125: Only 0 options after fixing
+REMOVED Q140: Only 0 options after fixing
+REMOVED Q174: Only 2 options after fixing
+REMOVED Q202: Only 0 options after fixing
+REMOVED Q211: Only 0 options after fixing
+REMOVED Q224: Only 0 options after fixing
+REMOVED Q497: Only 0 options after fixing
+REMOVED Q514: Only 0 options after fixing
+REMOVED Q811: No question text (len=3)
+REMOVED Q812: Only 3 options after fixing
+REMOVED Q813: Only 3 options after fixing
+REMOVED Q814: Only 3 options after fixing
+REMOVED Q821: Only 3 options after fixing
+REMOVED Q823: Only 3 options after fixing
+REMOVED Q832: Only 2 options after fixing
+REMOVED Q838: Only 3 options after fixing
+REMOVED Q840: Only 2 options after fixing
+REMOVED Q862: No question text (len=2)
+REMOVED Q863: No question text (len=3)
+REMOVED Q873: No question text (len=2)
+REMOVED Q875: No question text (len=2)
+REMOVED Q876: No question text (len=2)
+REMOVED Q877: No question text (len=2)
+REMOVED Q878: No question text (len=2)
+REMOVED Q879: No question text (len=2)
+REMOVED Q880: No question text (len=2)
+REMOVED Q881: No question text (len=2)
+
+REMOVED:
+------------------------------------------------------------
+ID=89: Only 3 options after fixing
+ID=96: Only 0 options after fixing
+ID=125: Only 0 options after fixing
+ID=140: Only 0 options after fixing
+ID=174: Only 2 options after fixing
+ID=202: Only 0 options after fixing
+ID=211: Only 0 options after fixing
+ID=224: Only 0 options after fixing
+ID=497: Only 0 options after fixing
+ID=514: Only 0 options after fixing
+ID=811: No question text (len=3)
+ID=812: Only 3 options after fixing
+ID=813: Only 3 options after fixing
+ID=814: Only 3 options after fixing
+ID=821: Only 3 options after fixing
+ID=823: Only 3 options after fixing
+ID=832: Only 2 options after fixing
+ID=838: Only 3 options after fixing
+ID=840: Only 2 options after fixing
+ID=862: No question text (len=2)
+ID=863: No question text (len=3)
+ID=873: No question text (len=2)
+ID=875: No question text (len=2)
+ID=876: No question text (len=2)
+ID=877: No question text (len=2)
+ID=878: No question text (len=2)
+ID=879: No question text (len=2)
+ID=880: No question text (len=2)
+ID=881: No question text (len=2)

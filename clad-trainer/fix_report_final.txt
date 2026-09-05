@@ -1,0 +1,35 @@
+Final Fix Report
+============================================================
+Input: 604 | Kept: 591 | Removed: 13
+
+FIXES & REMOVALS:
+------------------------------------------------------------
+REMOVED Q811: No question text (len=3) | text='128'
+REMOVED Q823: No question text (len=4) | text='0123'
+REMOVED Q832: No question text (len=4) | text='D .4'
+REMOVED Q862: No question text (len=2) | text='1)'
+REMOVED Q863: No question text (len=3) | text='10)'
+REMOVED Q873: No question text (len=2) | text='2)'
+REMOVED Q875: No question text (len=2) | text='3)'
+REMOVED Q876: No question text (len=2) | text='4)'
+REMOVED Q877: No question text (len=2) | text='5)'
+REMOVED Q878: No question text (len=2) | text='6)'
+REMOVED Q879: No question text (len=2) | text='7)'
+REMOVED Q880: No question text (len=2) | text='8)'
+REMOVED Q881: No question text (len=2) | text='9)'
+
+REMOVED QUESTIONS:
+------------------------------------------------------------
+ID=811: No question text (len=3) | 128
+ID=823: No question text (len=4) | 0123
+ID=832: No question text (len=4) | D .4
+ID=862: No question text (len=2) | 1)
+ID=863: No question text (len=3) | 10)
+ID=873: No question text (len=2) | 2)
+ID=875: No question text (len=2) | 3)
+ID=876: No question text (len=2) | 4)
+ID=877: No question text (len=2) | 5)
+ID=878: No question text (len=2) | 6)
+ID=879: No question text (len=2) | 7)
+ID=880: No question text (len=2) | 8)
+ID=881: No question text (len=2) | 9)

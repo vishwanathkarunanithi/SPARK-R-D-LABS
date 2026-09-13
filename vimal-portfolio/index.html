@@ -1,221 +1,400 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vimal S | Cinematic Video Editor</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Space+Grotesk:wght@400;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIMAL S | Professional Video Editor & Visual Storyteller</title>
+  <meta name="description" content="Official Portfolio of Vimal S (VIMAL EDITZZ) - Professional Video Editor, Colorist & Visual Storyteller specializing in cinematic cuts, reels, and high-retention post-production.">
+  <link rel="stylesheet" href="src/styles/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 </head>
-
 <body>
-    <div class="film-grain"></div>
 
-    <canvas id="cinematic-canvas"></canvas>
+  <!-- Fullscreen Cinematic Background Video -->
+  <div class="video-container">
+    <video autoplay loop muted playsinline id="bg-video">
+      <source src="portfolio_hero_combined.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+    <div class="overlay"></div>
+  </div>
 
-    <nav class="glass-nav">
-        <div class="logo">
-            <img src="./logo.png" alt="Vimal S Logo" style="height: 65px; display: block;">
+  <!-- Sleek Floating Glass Navbar -->
+  <nav class="navbar">
+    <a href="#home" class="brand-link" title="Vimal Editzz Home">
+      <img src="assets/emblem_clean.png" alt="Vimal Editzz Emblem" class="brand-emblem">
+      <div class="brand-text-wrap">
+        <span class="brand-name">VIMAL EDITZZ</span>
+        <svg class="brand-badge-icon" viewBox="0 0 24 24" width="18" height="18" fill="#1da1f2">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#intro">Vision</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <!-- Audio Toggle Button -->
+    <button id="audio-toggle" class="audio-btn" title="Toggle Sound">
+      <svg id="icon-unmuted" style="display:none;" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+      <svg id="icon-muted" viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+    </button>
+  </nav>
+
+  <!-- Hero Section: Video Background Unobstructed -->
+  <section id="home" class="hero">
+    <div class="hero-scroll-prompt">
+      <span class="scroll-text">SCROLL TO EXPLORE</span>
+      <div class="scroll-indicator">
+        <div class="scroll-dot"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intro Section (Next Page / First Scroll) -->
+  <section id="intro" class="intro-section">
+    <div class="container hero-content">
+      <div class="badge-tag">CINEMATIC POST-PRODUCTION</div>
+      <h1 class="glitch" data-text="VIMAL S">VIMAL S</h1>
+      <p class="hero-role">LEAD VIDEO EDITOR &bull; COLORIST &bull; VISUAL STORYTELLER</p>
+      <p class="subtitle">"Transforming raw footage into high-retention cinematic narratives that seize attention and spark emotion."</p>
+      <div class="stats">
+        <div class="stat-pill"><span class="stat-num">50+</span> <span class="stat-txt">Projects Delivered</span></div>
+        <div class="stat-sep">&bull;</div>
+        <div class="stat-pill"><span class="stat-num">3+</span> <span class="stat-txt">Years Experience</span></div>
+        <div class="stat-sep">&bull;</div>
+        <div class="stat-pill"><span class="stat-num">100%</span> <span class="stat-txt">Audience Retention Focus</span></div>
+      </div>
+      <div class="hero-actions">
+        <a href="#about" class="cta-btn primary-cta">Meet The Editor</a>
+        <a href="#contact" class="cta-btn secondary-cta">Get In Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section with Real Photo of Vimal -->
+  <section id="about" class="about-section">
+    <div class="container">
+      <div class="section-badge">BIOGRAPHY</div>
+      <h2 class="section-title">THE <span class="gradient-text">EDITOR</span></h2>
+      
+      <div class="about-grid">
+        <!-- Vimal's Studio Portrait -->
+        <div class="about-photo-wrapper">
+          <div class="photo-glow-effect"></div>
+          <div class="photo-frame">
+            <img src="assets/vimal_photo.jpg" alt="Vimal S - Video Editor Portrait" class="editor-portrait">
+            <div class="photo-overlay-tag">
+              <span class="photo-name">VIMAL S</span>
+              <span class="photo-badge">&#10004; VERIFIED CREATOR</span>
+            </div>
+          </div>
         </div>
-        <div class="nav-links">
-            <a href="#hero">Director's Cut</a>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#work">Portfolio</a>
-            <a href="#contact">Bookings</a>
+
+        <!-- Editor Bio & Philosophy -->
+        <div class="about-info">
+          <h3 class="about-headline">"Editing is the <span class="highlight">architecture</span> of emotion."</h3>
+          <p class="about-desc">
+            I'm <strong>Vimal S</strong>, a dedicated video editor based in Chidambaram. My journey didn't start in a massive studio; it started with an intense passion for visual storytelling and a relentless drive to master the timeline. Over the years, I have fully immersed myself in the art of the cut.
+          </p>
+          <p class="about-desc">
+            I specialize in taking raw, unstructured, and chaotic footage and forging it into compelling, high-retention stories that command attention in today's fast-paced digital landscape. Whether it's a high-energy brand reel, cinematic title sequence, or subtle documentary pacing, I focus on the micro-details: the exact frame where a beat drops, the perfect color grade that sets the mood, and the rhythm that keeps viewers hooked until the very last second.
+          </p>
+
+          <div class="about-highlights">
+            <div class="highlight-item">
+              <i class="ti ti-scissors"></i>
+              <div>
+                <h4>Precision Pacing</h4>
+                <p>Frame-accurate cut timing synchronized with rhythmic audio</p>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <i class="ti ti-palette"></i>
+              <div>
+                <h4>Color Science</h4>
+                <p>Mood-defining color grading with rich contrast and skin tones</p>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <i class="ti ti-chart-arrows"></i>
+              <div>
+                <h4>Retention Focused</h4>
+                <p>Engineered for high engagement across reels, ads, and long-form</p>
+              </div>
+            </div>
+          </div>
         </div>
-    </nav>
+      </div>
+    </div>
+  </section>
 
-    <main class="scroll-container">
-        <section id="hero" class="hero-photo-layout">
-            <div class="hero-photo-container mass-reveal">
-                <div class="hero-photo-gradient"></div>
-                <img src="./SSS03511.JPG.jpeg" alt="Vimal S Portrait" class="hero-portrait">
+  <!-- Dedicated Industry-Standard Tools Section -->
+  <section id="tools" class="tools-section">
+    <div class="container">
+      <div class="section-badge">SOFTWARE & TECHNICAL ARSENAL</div>
+      <h2 class="section-title">FAMOUS EDITING <span class="gradient-text">TOOLS</span></h2>
+      <p class="section-subtitle">The industry-standard editing suites, motion design applications, and audio workstations essential for modern broadcast-level post-production.</p>
+
+      <div class="tools-categories-grid">
+        
+        <!-- Category 1: Non-Linear Video Editors -->
+        <div class="tool-card">
+          <div class="tool-card-header">
+            <div class="tool-icon-circle"><i class="ti ti-video"></i></div>
+            <div>
+              <span class="tool-category">Industry Standard NLE</span>
+              <h3 class="tool-name">Adobe Premiere Pro</h3>
             </div>
-            <div class="content-wrapper hero-text-overlay">
-                <p class="subtitle mass-reveal" style="color: var(--accent);">Visual Storyteller & Editor</p>
-                <h1 class="title mass-reveal">CRAFTING<br><span class="accent stroke-text">CINEMATIC</span><br>ENGAGEMENT</h1>
-                <p class="description mass-reveal">Transforming raw footage into high-retention content for brands and creators across all platforms.</p>
-            </div>
-        </section>
-
-        <div class="ticker">
-            <span class="ticker-inner">✦ VIDEO EDITING &nbsp;&nbsp;&nbsp; ✦ AI ANIMATIONS &nbsp;&nbsp;&nbsp; ✦ STORYTELLING &nbsp;&nbsp;&nbsp; ✦ BRAND CONTENT &nbsp;&nbsp;&nbsp; ✦ REELS & SHORTS &nbsp;&nbsp;&nbsp; ✦ CINEMATIC EDITS &nbsp;&nbsp;&nbsp; ✦ VIDEO EDITING &nbsp;&nbsp;&nbsp; ✦ AI ANIMATIONS &nbsp;&nbsp;&nbsp; ✦ STORYTELLING &nbsp;&nbsp;&nbsp;</span>
-        </div>
-
-        <section id="showcase" class="mass-reveal" style="width: 100%; margin: 0; padding: 0;">
-            <div class="full-width-video-wrapper clickable" id="playWelcomeBtn">
-                <div class="video-inner-wrapper">
-                    <video playsinline class="avatar-video" id="welcomeVideo" style="display: none;">
-                        <source src="./Hello_and_welcome_I_m_Vimal_S.mp4" type="video/mp4">
-                    </video>
-                    <div class="watermark-patch" id="watermarkPatch"></div>
-                    <img src="./SSS03511.JPG.jpeg" alt="Vimal S" class="avatar-fallback" id="welcomeLogo">
-                    <div class="play-icon-overlay" id="playIcon">▶</div>
-                </div>
-            </div>
-        </section>
-
-        <section id="about" class="cinematic-section" style="padding-top: 50px;">
-            <div class="content-wrapper" style="margin: 0 auto; max-width: 800px; text-align: center; display: flex; flex-direction: column; align-items: center;">
-                <h2 class="title mass-reveal">THE <span class="accent stroke-text">EDITOR</span></h2>
-                <p class="description mass-reveal" style="font-size: 1.1rem; line-height: 1.8; color: var(--text-muted); text-align: justify;">
-                    I'm Vimal S, a dedicated video editor based in Chidambaram. My journey didn't start in a massive studio; it started with an intense passion for visual storytelling and a relentless drive to master the timeline. Over the past year, I have fully immersed myself in the art of the cut. I specialize in taking raw, unstructured, and chaotic footage and forging it into compelling, high-retention stories that command attention in today's fast-paced digital landscape.
-                    <br><br>
-                    Editing isn't just a technical skill for me—it's the architecture of emotion. Whether it's a high-energy brand reel or a subtle cinematic documentary, I focus on the micro-details: the exact frame where a beat drops, the perfect color grade that sets the mood, and the precise pacing that keeps an audience hooked until the very last second.
-                </p>
-                <div class="tools-row mass-reveal" style="margin-top: 20px; justify-content: center;">
-                    <span class="tool-pill">Adobe Premiere Pro</span>
-                    <span class="tool-pill">After Effects</span>
-                    <span class="tool-pill">DaVinci Resolve</span>
-                    <span class="tool-pill">Lightroom</span>
-                    <span class="tool-pill">Midjourney</span>
-                    <span class="tool-pill">RunwayML</span>
-                    <span class="tool-pill">CapCut</span>
-                    <span class="tool-pill">Color Grading</span>
-                    <span class="tool-pill">Motion Graphics</span>
-                    <span class="tool-pill">Storytelling</span>
-                </div>
-            </div>
-        </section>
-
-        <section id="philosophy" class="cinematic-section" style="background: linear-gradient(180deg, var(--bg-dark) 0%, rgba(212, 175, 55, 0.05) 50%, var(--bg-dark) 100%); min-height: 50vh;">
-            <div class="content-wrapper" style="margin: 0 auto; max-width: 1000px; text-align: center;">
-                <h2 class="title mass-reveal" style="font-size: clamp(2rem, 5vw, 4rem); margin-bottom: 30px;">"Editing is the <br><span class="accent stroke-text">ARCHITECTURE</span> of emotion."</h2>
-                <p class="description mass-reveal" style="font-size: 1.3rem; max-width: 700px; margin: 0 auto;">
-                    I don't just assemble clips. I build rhythm. I believe that pacing breathes life into footage, cuts have a vocabulary of their own, and visuals must relentlessly drive the narrative forward. Every single frame must earn its place on the screen.
-                </p>
-            </div>
-        </section>
-
-        <div class="stats-bar mass-reveal">
-            <div class="stat-item"><div class="stat-num">50+</div><div class="stat-label">Projects Done</div></div>
-            <div class="stat-item"><div class="stat-num">1+</div><div class="stat-label">Year XP</div></div>
-            <div class="stat-item"><div class="stat-num">AI</div><div class="stat-label">Animation</div></div>
-            <div class="stat-item"><div class="stat-num">∞</div><div class="stat-label">Creative Vision</div></div>
+          </div>
+          <p class="tool-desc">The global benchmark for multi-camera editing, rapid timeline management, dynamic link integration, and broadcast deliverability.</p>
+          <div class="tool-tags">
+            <span>Multi-Cam Sync</span>
+            <span>Dynamic Linking</span>
+            <span>Proxies</span>
+            <span>Audio Ducking</span>
+          </div>
         </div>
 
-        <section id="services" class="cinematic-section" style="display: block; min-height: auto; padding: 100px 10vw;">
-            <div class="content-wrapper" style="margin: 0 auto; max-width: 1000px; width: 100%;">
-                <div class="section-header mass-reveal">
-                    <span class="section-label">Services</span>
-                    <div class="section-line"></div>
-                </div>
-                <div class="services-grid mass-reveal">
-                    <div class="service-card">
-                        <div class="service-icon"><i class="ti ti-cut" aria-hidden="true"></i></div>
-                        <div class="service-name">Video Editing</div>
-                        <div class="service-desc">Cinematic cuts, color grading, pacing</div>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon"><i class="ti ti-robot" aria-hidden="true"></i></div>
-                        <div class="service-name">AI Animations</div>
-                        <div class="service-desc">Next-gen AI-driven motion visuals</div>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon"><i class="ti ti-device-mobile" aria-hidden="true"></i></div>
-                        <div class="service-name">Reels & Shorts</div>
-                        <div class="service-desc">Social-first vertical video content</div>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon"><i class="ti ti-brand-youtube" aria-hidden="true"></i></div>
-                        <div class="service-name">Brand Videos</div>
-                        <div class="service-desc">Stories that elevate your brand</div>
-                    </div>
-                </div>
+        <!-- Category 2: DaVinci Resolve Studio -->
+        <div class="tool-card highlight-card">
+          <div class="tool-card-header">
+            <div class="tool-icon-circle"><i class="ti ti-aperture"></i></div>
+            <div>
+              <span class="tool-category">Hollywood Grading & NLE</span>
+              <h3 class="tool-name">DaVinci Resolve Studio</h3>
             </div>
-        </section>
-
-        <section id="process" class="cinematic-section" style="display: block; min-height: auto; padding: 100px 10vw;">
-            <div class="content-wrapper" style="margin: 0 auto; max-width: 1000px; width: 100%;">
-                <div class="section-header mass-reveal">
-                    <span class="section-label">The Process</span>
-                    <div class="section-line"></div>
-                </div>
-                
-                <div class="process-timeline mass-reveal">
-                    <div class="process-step">
-                        <div class="step-number">01</div>
-                        <h3 class="step-title">Vision & Strategy</h3>
-                        <p class="step-desc">We start by dissecting the core message. Understanding your brand, the target audience, and the desired emotion is crucial before a single cut is made.</p>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-number">02</div>
-                        <h3 class="step-title">The Rough Cut</h3>
-                        <p class="step-desc">Carving the narrative out of raw data. This is where the foundation is built, focusing purely on storytelling, pacing, and flow without getting distracted by the polish.</p>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-number">03</div>
-                        <h3 class="step-title">Polish & Pacing</h3>
-                        <p class="step-desc">The magic happens here. Immersive sound design, precise color grading, motion graphics, and micro-edits are applied to elevate the footage from good to cinematic.</p>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-number">04</div>
-                        <h3 class="step-title">Final Delivery</h3>
-                        <p class="step-desc">A masterpiece formatted and optimized for maximum retention across all target platforms, delivered ready to command attention.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="work" class="cinematic-section" style="display: block; min-height: auto; padding: 50px 10vw;">
-            <div class="content-wrapper" style="margin: 0 auto; max-width: 1000px; width: 100%;">
-                <div class="section-header mass-reveal">
-                    <span class="section-label">Work Samples</span>
-                    <div class="section-line"></div>
-                </div>
-                <div class="work-grid mass-reveal">
-                    <a href="https://wa.me/919025675071" target="_blank" class="work-card" style="text-decoration: none;">
-                        <div class="work-placeholder">
-                            <div class="work-icon"><i class="ti ti-movie" aria-hidden="true"></i></div>
-                            <div class="work-title">Cinematic Short Film Edit</div>
-                        </div>
-                        <div class="work-tag">Film</div>
-                    </a>
-                    <a href="https://wa.me/919025675071" target="_blank" class="work-card" style="text-decoration: none;">
-                        <div class="work-placeholder">
-                            <div class="work-icon"><i class="ti ti-sparkles" aria-hidden="true"></i></div>
-                            <div class="work-title">AI Animation Reel</div>
-                        </div>
-                        <div class="work-tag">AI</div>
-                    </a>
-                    <a href="https://wa.me/919025675071" target="_blank" class="work-card" style="text-decoration: none;">
-                        <div class="work-placeholder">
-                            <div class="work-icon"><i class="ti ti-brand-instagram" aria-hidden="true"></i></div>
-                            <div class="work-title">Brand Reels & Campaigns</div>
-                        </div>
-                        <div class="work-tag">Brand</div>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="cinematic-section" style="min-height: auto; padding: 100px 10vw;">
-            <div class="cta-section mass-reveal">
-                <p class="cta-headline">Ready to elevate your brand?</p>
-                <p class="cta-sub">From concept to final cut — let's craft something unforgettable together.</p>
-                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=vimals2006s@gmail.com" target="_blank" class="btn-primary" style="text-decoration: none;">Email Me</a>
-                    <a href="https://wa.me/919025675071" target="_blank" class="btn-ghost" style="text-decoration: none;">WhatsApp</a>
-                </div>
-            </div>
-        </section>
-
-        <div class="footer-bar mass-reveal">
-            <span class="footer-name">Vimal S.</span>
-            <div class="footer-links">
-                <a href="#contact" class="footer-link" style="text-decoration: none;">Contact</a>
-                <a href="#work" class="footer-link" style="text-decoration: none;">Portfolio</a>
-                <a href="#services" class="footer-link" style="text-decoration: none;">Services</a>
-            </div>
+          </div>
+          <p class="tool-desc">The gold standard for world-class cinematic color grading, ACES color management, node-based corrections, and Fairlight audio mastering.</p>
+          <div class="tool-tags">
+            <span>ACES Colorist</span>
+            <span>HDR 10+</span>
+            <span>Node Tree</span>
+            <span>Fairlight Audio</span>
+          </div>
         </div>
-    </main>
 
-    <script src="script.js"></script>
+        <!-- Category 3: Adobe After Effects -->
+        <div class="tool-card">
+          <div class="tool-card-header">
+            <div class="tool-icon-circle"><i class="ti ti-sparkles"></i></div>
+            <div>
+              <span class="tool-category">Visual FX & Motion Graphics</span>
+              <h3 class="tool-name">Adobe After Effects</h3>
+            </div>
+          </div>
+          <p class="tool-desc">Cinematic title cards, 3D camera tracking, compositing, visual effects, and customized kinetic typography for film & branding.</p>
+          <div class="tool-tags">
+            <span>3D Camera Tracker</span>
+            <span>VFX Compositing</span>
+            <span>Title Cards</span>
+            <span>Keyframing</span>
+          </div>
+        </div>
+
+        <!-- Category 4: Apple Final Cut Pro -->
+        <div class="tool-card">
+          <div class="tool-card-header">
+            <div class="tool-icon-circle"><i class="ti ti-device-laptop"></i></div>
+            <div>
+              <span class="tool-category">High-Speed Mac NLE</span>
+              <h3 class="tool-name">Apple Final Cut Pro</h3>
+            </div>
+          </div>
+          <p class="tool-desc">Renowned for magnetic timeline workflows, real-time ProRes processing, and rapid turnaround on commercial and short-form projects.</p>
+          <div class="tool-tags">
+            <span>Magnetic Timeline</span>
+            <span>ProRes RAW</span>
+            <span>Color Wheels</span>
+            <span>Quick Turnaround</span>
+          </div>
+        </div>
+
+        <!-- Category 5: Avid Media Composer & Pro Tools -->
+        <div class="tool-card">
+          <div class="tool-card-header">
+            <div class="tool-icon-circle"><i class="ti ti-movie"></i></div>
+            <div>
+              <span class="tool-category">Broadcast & Feature Films</span>
+              <h3 class="tool-name">Avid Media Composer</h3>
+            </div>
+          </div>
+          <p class="tool-desc">The time-tested Hollywood powerhouse for enterprise studio pipelines, long-form feature films, and broadcast television editing.</p>
+          <div class="tool-tags">
+            <span>Studio Workflows</span>
+            <span>Media Management</span>
+            <span>Pro Tools Interop</span>
+            <span>Film Cuts</span>
+          </div>
+        </div>
+
+        <!-- Category 6: Audio Workstations (Audition / Pro Tools) -->
+        <div class="tool-card">
+          <div class="tool-card-header">
+            <div class="tool-icon-circle"><i class="ti ti-headphones"></i></div>
+            <div>
+              <span class="tool-category">Sound Design & Foley</span>
+              <h3 class="tool-name">Adobe Audition & Fairlight</h3>
+            </div>
+          </div>
+          <p class="tool-desc">Spectral frequency editing, surgical noise reduction, dialogue restoration, sound design risers, and cinematic bass impact mastering.</p>
+          <div class="tool-tags">
+            <span>Spectral Cleanup</span>
+            <span>Dialogue Leveler</span>
+            <span>Foley Mixing</span>
+            <span>LUFS Mastering</span>
+          </div>
+        </div>
+
+        <!-- Category 7: Analog Film & Color Plugins -->
+        <div class="tool-card">
+          <div class="tool-card-header">
+            <div class="tool-icon-circle"><i class="ti ti-filter"></i></div>
+            <div>
+              <span class="tool-category">Analog Emulation & Grading</span>
+              <h3 class="tool-name">Dehancer & FilmConvert</h3>
+            </div>
+          </div>
+          <p class="tool-desc">Physical film stock emulation (Kodak Vision3, Fujifilm), authentic 35mm / 16mm halation, bloom, and organic film grain texturing.</p>
+          <div class="tool-tags">
+            <span>Film Halation</span>
+            <span>Kodak 5219</span>
+            <span>Film Breath</span>
+            <span>Organic Grain</span>
+          </div>
+        </div>
+
+        <!-- Category 8: AI & Advanced Tracking Tools -->
+        <div class="tool-card">
+          <div class="tool-card-header">
+            <div class="tool-icon-circle"><i class="ti ti-brain"></i></div>
+            <div>
+              <span class="tool-category">Next-Gen AI & Tracking</span>
+              <h3 class="tool-name">Mocha Pro & Topaz AI</h3>
+            </div>
+          </div>
+          <p class="tool-desc">Planar surface tracking, screen replacement, rotoscoping with Mocha Pro, and neural upscaling, 60fps slow-mo enhancement with Topaz Video AI.</p>
+          <div class="tool-tags">
+            <span>Planar Tracking</span>
+            <span>Rotoscoping</span>
+            <span>Neural Upscale</span>
+            <span>CapCut Pro</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Quick Arsenal Badges -->
+      <div class="arsenal-pills-row">
+        <span class="arsenal-badge"><i class="ti ti-check"></i> Premiere Pro</span>
+        <span class="arsenal-badge"><i class="ti ti-check"></i> DaVinci Resolve</span>
+        <span class="arsenal-badge"><i class="ti ti-check"></i> After Effects</span>
+        <span class="arsenal-badge"><i class="ti ti-check"></i> Final Cut Pro</span>
+        <span class="arsenal-badge"><i class="ti ti-check"></i> Avid Media Composer</span>
+        <span class="arsenal-badge"><i class="ti ti-check"></i> Pro Tools / Fairlight</span>
+        <span class="arsenal-badge"><i class="ti ti-check"></i> Mocha Pro</span>
+        <span class="arsenal-badge"><i class="ti ti-check"></i> Topaz Video AI</span>
+        <span class="arsenal-badge"><i class="ti ti-check"></i> CapCut Pro</span>
+        <span class="arsenal-badge"><i class="ti ti-check"></i> Photoshop & Lightroom</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services & Capabilities Section -->
+  <section id="services" class="services-section">
+    <div class="container">
+      <div class="section-badge">CAPABILITIES</div>
+      <h2 class="section-title">WHAT I <span class="gradient-text">DELIVER</span></h2>
+
+      <div class="services-grid">
+        <div class="service-box">
+          <div class="service-num">01</div>
+          <h3>Cinematic Video Editing</h3>
+          <p>Long-form documentaries, short films, music videos, and commercial brand narratives engineered with rhythm and visual punch.</p>
+        </div>
+        <div class="service-box">
+          <div class="service-num">02</div>
+          <h3>High-Retention Reels & Shorts</h3>
+          <p>Fast-paced, hook-driven social edits for Instagram and YouTube designed to maximize view duration and virality.</p>
+        </div>
+        <div class="service-box">
+          <div class="service-num">03</div>
+          <h3>Color Grading & Film Emulation</h3>
+          <p>Cinematic look-dev using DaVinci Resolve, ACES color science, mood-tailored LUTs, and analog 35mm film textures.</p>
+        </div>
+        <div class="service-box">
+          <div class="service-num">04</div>
+          <h3>Sound Design & Foley Impact</h3>
+          <p>Multi-layered soundscapes, custom whooshes, risers, sub-drops, and audio sweetening to amplify emotional intensity.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <div class="section-badge">DIRECT BOOKINGS</div>
+      <h2 class="section-title">LET'S BUILD SOMETHING <span class="gradient-text">ICONIC</span></h2>
+      <p class="contact-subtitle">Have a project or timeline in mind? Get in touch directly to discuss your video editing requirements.</p>
+
+      <div class="contact-cards-container">
+        <!-- Direct Phone -->
+        <a href="tel:+919025675071" class="contact-card">
+          <div class="contact-icon"><i class="ti ti-phone-call"></i></div>
+          <div class="contact-card-info">
+            <span class="contact-label">Phone & Call</span>
+            <span class="contact-val">+91 90256 75071</span>
+          </div>
+        </a>
+
+        <!-- WhatsApp Direct -->
+        <a href="https://wa.me/919025675071" target="_blank" class="contact-card highlight-contact">
+          <div class="contact-icon"><i class="ti ti-brand-whatsapp"></i></div>
+          <div class="contact-card-info">
+            <span class="contact-label">WhatsApp Direct</span>
+            <span class="contact-val">Chat on WhatsApp</span>
+          </div>
+        </a>
+
+        <!-- Direct Email -->
+        <a href="mailto:vimals2006s@gmail.com" class="contact-card">
+          <div class="contact-icon"><i class="ti ti-mail"></i></div>
+          <div class="contact-card-info">
+            <span class="contact-label">Email Inquiries</span>
+            <span class="contact-val">vimals2006s@gmail.com</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Social Links -->
+      <div class="social-links-row">
+        <a href="https://www.instagram.com/_editzzz._.10?stkn=dnlqNTRkOTF2N3dm" target="_blank" class="social-btn instagram-btn">
+          <i class="ti ti-brand-instagram"></i> Instagram (@_editzzz._.10)
+        </a>
+        <a href="https://www.linkedin.com/in/vimal-s-ba870032b?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="social-btn linkedin-btn">
+          <i class="ti ti-brand-linkedin"></i> LinkedIn Profile
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer with Brand Logo -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <img src="assets/logo_full_transparent.png" alt="VIMAL EDITZZ Logo" class="footer-logo">
+      <p class="footer-copy">&copy; 2026 VIMAL EDITZZ. All Rights Reserved.</p>
+      <p class="footer-sub">Crafted with cinematic passion &bull; Chidambaram, India</p>
+    </div>
+  </footer>
+
+  <script src="src/main.js"></script>
 </body>
-
 </html>

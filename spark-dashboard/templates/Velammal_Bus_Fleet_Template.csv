@@ -1,0 +1,7 @@
+bus_no,route_name,driver_name,driver_phone,stops,morning_eta,status
+B01,Anna Nagar Roundtana,M. Murugan,+91 98401 23451,"Anna Arch, Roundtana, Thirumangalam, Campus",08:15 AM,On Route
+B05,Tambaram Sanatorium,K. Selvam,+91 98402 34562,"Chromepet, Pallavaram, Guindy, Campus",08:20 AM,On Route
+B12,Avadi / Ambattur OT,P. Rajendran,+91 98403 45673,"Avadi Checkpost, Ambattur OT, Estate, Campus",08:10 AM,Arrived
+B18,Adyar / Velachery,S. Mani,+91 98404 56784,"Adyar Depot, Madhya Kailash, Velachery, Campus",08:25 AM,On Route
+B22,Redhills / Kolathur,G. Kumar,+91 98405 67895,"Redhills Bypass, Retteri, Kolathur, Campus",08:12 AM,On Route
+B30,T. Nagar / Saidapet,V. Balan,+91 98406 78906,"Panagal Park, Saidapet, Little Mount, Campus",08:18 AM,On Route

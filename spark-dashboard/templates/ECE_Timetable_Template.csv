@@ -1,0 +1,7 @@
+course_code,course_name,department,semester,faculty_name,room_no,day,time_slot
+EC8395,Analog Electronics,ECE,5,Dr. S. Soundar Rajan,EC-202,Monday,08:30 AM - 10:10 AM
+EC8391,Control Systems Engineering,ECE,5,Prof. K. Ramesh,EC-202,Monday,10:30 AM - 12:10 PM
+EC8452,Signals and Systems,ECE,5,Dr. M. Geetha,EC-202,Tuesday,01:00 PM - 02:40 PM
+EC8501,Digital Communication,ECE,5,Dr. T. Venkatesh,EC-202,Wednesday,08:30 AM - 10:10 AM
+EC8551,Linear Integrated Circuits,ECE,5,Prof. R. Shalini,EC-Lab-1,Thursday,08:30 AM - 12:10 PM
+EC8562,Digital Signal Processing Lab,ECE,5,Prof. K. Ramesh,DSP-Lab-2,Friday,01:00 PM - 03:30 PM

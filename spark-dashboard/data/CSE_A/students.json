@@ -1,0 +1,10 @@
+[
+  { "id": "113320104001", "name": "Rahul S.", "attendance": "Present", "cgpa": 8.92, "afi": 94 },
+  { "id": "113320104002", "name": "Priya M.", "attendance": "Present", "cgpa": 9.15, "afi": 91 },
+  { "id": "113320104003", "name": "Karthik R.", "attendance": "Present", "cgpa": 8.64, "afi": 88 },
+  { "id": "113320104004", "name": "Suresh K.", "attendance": "Present", "cgpa": 8.21, "afi": 82 },
+  { "id": "113320104005", "name": "Sneha R.", "attendance": "Present", "cgpa": 9.32, "afi": 93 },
+  { "id": "113320104006", "name": "Arjun P.", "attendance": "Absent", "cgpa": 7.95, "afi": 62 },
+  { "id": "113320104007", "name": "Siddharth J.", "attendance": "Present", "cgpa": 8.45, "afi": 81 },
+  { "id": "113320104008", "name": "Aakash M.", "attendance": "Absent", "cgpa": 7.42, "afi": 58 }
+]

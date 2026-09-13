@@ -1,0 +1,13 @@
+reg_no,name,department,section,year,cgpa,attendance,student_mobile,parent_mobile,student_email
+113320106001,Ananya Venkatesh,ECE,A,3,9.45,Present,9840112233,9840998877,ananya.v@velammal.edu.in
+113320106002,Nisha Balakrishnan,ECE,A,3,8.80,Present,9840112234,9840998878,nisha.b@velammal.edu.in
+113320106003,Gowtham Rajan,ECE,A,3,8.25,Present,9840112235,9840998879,gowtham.r@velammal.edu.in
+113320106004,Shreya Sundar,ECE,A,3,9.10,Present,9840112236,9840998880,shreya.s@velammal.edu.in
+113320106005,Manoj Kumar,ECE,A,3,7.40,Absent,9840112237,9840998881,manoj.k@velammal.edu.in
+113320106006,Pavithra S.,ECE,A,3,8.95,Present,9840112238,9840998882,pavithra.s@velammal.edu.in
+113320106007,Srinivasan K.,ECE,A,3,8.60,Present,9840112239,9840998883,srini.k@velammal.edu.in
+113320106008,Deepak Chandran,ECE,A,3,8.15,Present,9840112240,9840998884,deepak.c@velammal.edu.in
+113320106009,Kavya Murthy,ECE,A,3,9.30,Present,9840112241,9840998885,kavya.m@velammal.edu.in
+113320106010,Vigneshwaran P.,ECE,A,3,7.10,Absent,9840112242,9840998886,vignesh.p@velammal.edu.in
+113320106011,Lavanya Ramesh,ECE,A,3,8.75,Present,9840112243,9840998887,lavanya.r@velammal.edu.in
+113320106012,Ashwin Sundaram,ECE,A,3,8.40,Present,9840112244,9840998888,ashwin.s@velammal.edu.in

@@ -1,0 +1,6 @@
+faculty_id,faculty_name,designation,department,cabin,email,status
+FAC-ECE-01,Dr. S. Soundar Rajan,Associate Professor & HOD,ECE,ECE Block 202,soundar.rajan@velammal.edu.in,ONLINE
+FAC-ECE-02,Prof. K. Ramesh,Assistant Professor,ECE,ECE Block 205,ramesh.k@velammal.edu.in,ONLINE
+FAC-ECE-03,Dr. M. Geetha,Associate Professor,ECE,ECE Block 208,geetha.m@velammal.edu.in,BUSY
+FAC-ECE-04,Prof. R. Shalini,Assistant Professor & Mentor,ECE,ECE Block 210,shalini.r@velammal.edu.in,ONLINE
+FAC-ECE-05,Dr. T. Venkatesh,Professor (Embedded Systems),ECE,ECE Block 301,venkatesh.t@velammal.edu.in,ONLINE
